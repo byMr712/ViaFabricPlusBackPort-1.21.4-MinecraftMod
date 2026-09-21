@@ -21,6 +21,7 @@
 
 package com.viaversion.viafabricplus.protocoltranslator.protocol;
 
+import com.google.common.collect.Lists;
 import com.viaversion.viafabricplus.features.entity.metadata_handling.WolfHealthTracker1_14_4;
 import com.viaversion.viafabricplus.protocoltranslator.ProtocolTranslator;
 import com.viaversion.viafabricplus.protocoltranslator.protocol.storage.BedrockJoinGameTracker;
@@ -34,12 +35,12 @@ import com.viaversion.viaversion.api.protocol.packet.provider.PacketTypesProvide
 import com.viaversion.viaversion.api.protocol.packet.provider.SimplePacketTypesProvider;
 import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
 import com.viaversion.viaversion.api.type.Types;
-import com.viaversion.viaversion.protocols.v1_21_11to26_1.packet.ClientboundPacket26_1;
-import com.viaversion.viaversion.protocols.v1_21_11to26_1.packet.ClientboundPackets26_1;
-import com.viaversion.viaversion.protocols.v1_21_11to26_1.packet.ServerboundPacket26_1;
-import com.viaversion.viaversion.protocols.v1_21_11to26_1.packet.ServerboundPackets26_1;
-import com.viaversion.viaversion.protocols.v1_21_7to1_21_9.packet.ClientboundConfigurationPackets1_21_9;
 import com.viaversion.viaversion.protocols.v1_21_7to1_21_9.packet.ServerboundConfigurationPackets1_21_9;
+import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ClientboundConfigurationPackets26_3;
+import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ClientboundPacket26_3;
+import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ClientboundPackets26_3;
+import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ServerboundPacket26_3;
+import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ServerboundPackets26_3;
 import com.viaversion.viaversion.util.Key;
 import net.minecraft.network.packet.BrandCustomPayload;
 import net.minecraft.network.packet.CustomPayload;
@@ -50,19 +51,21 @@ import net.minecraft.util.Pair;
 import net.raphimc.viabedrock.api.BedrockProtocolVersion;
 import net.raphimc.vialegacy.api.LegacyProtocolVersion;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.viaversion.viaversion.util.ProtocolUtil.packetTypeMap;
 
-public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPacket26_1, ClientboundPacket26_1, ServerboundPacket26_1, ServerboundPacket26_1> {
+public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPacket26_3, ClientboundPacket26_3, ServerboundPacket26_3, ServerboundPacket26_3> {
 
     public static final ViaFabricPlusProtocol INSTANCE = new ViaFabricPlusProtocol();
 
     private final Map<String, Pair<ProtocolVersion, PacketReader>> payloadDiff = new HashMap<>();
 
     public ViaFabricPlusProtocol() {
-        super(ClientboundPacket26_1.class, ClientboundPacket26_1.class, ServerboundPacket26_1.class, ServerboundPacket26_1.class);
+        super(ClientboundPacket26_3.class, ClientboundPacket26_3.class, ServerboundPacket26_3.class, ServerboundPacket26_3.class);
         registerMapping(BrandCustomPayload.ID, LegacyProtocolVersion.c0_0_15a_1, wrapper -> wrapper.passthrough(Types.STRING));
         registerMapping(DebugGameTestAddMarkerCustomPayload.ID, ProtocolVersion.v1_14, wrapper -> {
             wrapper.passthrough(Types.BLOCK_POSITION1_14);
@@ -98,6 +101,25 @@ public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPac
                 }
             }
         });
+
+        // Fixes an issue where the Fabric Particle API causes disconnects when both the client and server have the mod installed and both are 1.21.5+.
+        // See https://github.com/ViaVersion/ViaFabric/issues/428
+        this.registerServerbound(ServerboundConfigurationPackets1_21_9.CUSTOM_PAYLOAD, wrapper -> {
+            final ProtocolVersion serverVersion = wrapper.user().getProtocolInfo().serverProtocolVersion();
+            if (serverVersion.newerThanOrEqualTo(ProtocolVersion.v1_21_5) && !serverVersion.equals(wrapper.user().getProtocolInfo().protocolVersion())) {
+                final String channel = Key.namespaced(wrapper.passthrough(Types.STRING));
+                if (channel.equals("minecraft:register") || channel.equals("minecraft:unregister")) {
+                    final List<String> channels = Lists.newArrayList(new String(wrapper.passthrough(Types.SERVERBOUND_CUSTOM_PAYLOAD_DATA), StandardCharsets.UTF_8).split("\0"));
+                    if (channels.remove("fabric:extended_block_particle_option_sync")) {
+                        if (!channels.isEmpty()) {
+                            wrapper.set(Types.SERVERBOUND_CUSTOM_PAYLOAD_DATA, 0, String.join("\0", channels).getBytes(StandardCharsets.UTF_8));
+                        } else {
+                            wrapper.cancel();
+                        }
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -113,25 +135,30 @@ public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPac
         }
     }
 
+    @Override
+    protected void applySharedRegistrations() {
+        // Not for us, protocols will already track states down the line
+    }
+
     private void registerMapping(final CustomPayload.Id<?> id, final ProtocolVersion version, final PacketReader reader) {
         payloadDiff.put(id.id().toString(), new Pair<>(version, reader));
     }
 
     public static ServerboundPacketType getSetCreativeModeSlot() {
-        return ServerboundPackets26_1.SET_CREATIVE_MODE_SLOT;
+        return ServerboundPackets26_3.SET_CREATIVE_MODE_SLOT;
     }
 
     public static ClientboundPacketType getCustomPayload() {
-        return ClientboundPackets26_1.CUSTOM_PAYLOAD;
+        return ClientboundPackets26_3.CUSTOM_PAYLOAD;
     }
 
     @Override
-    protected PacketTypesProvider<ClientboundPacket26_1, ClientboundPacket26_1, ServerboundPacket26_1, ServerboundPacket26_1> createPacketTypesProvider() {
+    protected PacketTypesProvider<ClientboundPacket26_3, ClientboundPacket26_3, ServerboundPacket26_3, ServerboundPacket26_3> createPacketTypesProvider() {
         return new SimplePacketTypesProvider<>(
-            packetTypeMap(unmappedClientboundPacketType, ClientboundPackets26_1.class, ClientboundConfigurationPackets1_21_9.class),
-            packetTypeMap(mappedClientboundPacketType, ClientboundPackets26_1.class, ClientboundConfigurationPackets1_21_9.class),
-            packetTypeMap(mappedServerboundPacketType, ServerboundPackets26_1.class, ServerboundConfigurationPackets1_21_9.class),
-            packetTypeMap(unmappedServerboundPacketType, ServerboundPackets26_1.class, ServerboundConfigurationPackets1_21_9.class)
+            packetTypeMap(unmappedClientboundPacketType, ClientboundPackets26_3.class, ClientboundConfigurationPackets26_3.class),
+            packetTypeMap(mappedClientboundPacketType, ClientboundPackets26_3.class, ClientboundConfigurationPackets26_3.class),
+            packetTypeMap(mappedServerboundPacketType, ServerboundPackets26_3.class, ServerboundConfigurationPackets1_21_9.class),
+            packetTypeMap(unmappedServerboundPacketType, ServerboundPackets26_3.class, ServerboundConfigurationPackets1_21_9.class)
         );
     }
 
