@@ -151,8 +151,10 @@ public final class ItemTranslator {
             return VersionedTypes.V1_21_11.item;
         } else if (targetVersion.olderThan(ProtocolVersion.v26_2)) {
             return VersionedTypes.V26_1.item;
-        } else {
+        } else if (targetVersion.olderThan(ProtocolVersion.v26_3)) {
             return VersionedTypes.V26_2.item;
+        } else {
+            return VersionedTypes.V26_3.item;
         }
     }
 

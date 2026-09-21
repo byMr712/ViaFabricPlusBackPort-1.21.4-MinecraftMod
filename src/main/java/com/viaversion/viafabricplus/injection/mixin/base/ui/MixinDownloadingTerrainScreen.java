@@ -60,7 +60,7 @@ public abstract class MixinDownloadingTerrainScreen extends Screen {
             // Draw the classic loading progress
             context.drawCenteredTextWithShadow(
                     client.textRenderer,
-                    ChatUtil.prefixText(classicProgressStorage.status),
+                    ChatUtil.prefixText(classicProgressStorage.getStatus()),
                     width / 2,
                     height / 2 - 30,
                     -1
