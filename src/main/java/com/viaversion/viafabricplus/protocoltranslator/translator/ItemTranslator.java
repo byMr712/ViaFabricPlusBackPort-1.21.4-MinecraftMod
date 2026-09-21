@@ -139,8 +139,18 @@ public final class ItemTranslator {
             return VersionedTypes.V1_21.item;
         } else if (targetVersion.olderThan(ProtocolVersion.v1_21_4)) {
             return VersionedTypes.V1_21_2.item;
-        } else {
+        } else if (targetVersion.olderThan(ProtocolVersion.v1_21_5)) {
             return VersionedTypes.V1_21_4.item;
+        } else if (targetVersion.olderThan(ProtocolVersion.v1_21_6)) {
+            return VersionedTypes.V1_21_5.item;
+        } else if (targetVersion.olderThan(ProtocolVersion.v1_21_9)) {
+            return VersionedTypes.V1_21_6.item;
+        } else if (targetVersion.olderThan(ProtocolVersion.v1_21_11)) {
+            return VersionedTypes.V1_21_9.item;
+        } else if (targetVersion.olderThan(ProtocolVersion.v26_1)) {
+            return VersionedTypes.V1_21_11.item;
+        } else {
+            return VersionedTypes.V26_1.item;
         }
     }
 

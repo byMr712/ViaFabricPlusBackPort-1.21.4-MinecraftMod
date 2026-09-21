@@ -31,12 +31,13 @@ import net.minecraft.network.ClientConnection;
 import net.raphimc.minecraftauth.step.bedrock.StepMCChain;
 import net.raphimc.minecraftauth.step.bedrock.session.StepFullBedrockSession;
 import net.raphimc.viabedrock.api.BedrockProtocolVersion;
-import net.raphimc.viabedrock.protocol.storage.AuthChainData;
+import net.raphimc.viabedrock.protocol.storage.AuthData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.security.KeyPair;
 import java.util.UUID;
 
 @Mixin(targets = "net.minecraft.client.gui.screen.multiplayer.ConnectScreen$1")
@@ -53,7 +54,7 @@ public abstract class MixinConnectScreen_1 {
                 final UUID deviceId = mcChain.getXblXsts().getInitialXblSession().getXblDeviceToken().getId();
                 final String playFabId = bedrockSession.getPlayFabToken().getPlayFabId();
 
-                connection.put(new AuthChainData(mcChain.getMojangJwt(), mcChain.getIdentityJwt(), mcChain.getPublicKey(), mcChain.getPrivateKey(), deviceId, playFabId));
+                connection.put(new AuthData(mcChain.getMojangJwt(), mcChain.getIdentityJwt(), playFabId, new KeyPair(mcChain.getPublicKey(), mcChain.getPrivateKey()), deviceId));
             } else {
                 ViaFabricPlusImpl.INSTANCE.logger().warn("Could not get Bedrock account. Joining online mode servers will not work!");
             }

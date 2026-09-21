@@ -26,8 +26,8 @@ import com.viaversion.vialoader.netty.VLPipeline;
 import com.viaversion.viaversion.api.connection.UserConnection;
 import io.netty.channel.Channel;
 import net.raphimc.viabedrock.api.io.compression.ProtocolCompression;
-import net.raphimc.viabedrock.netty.AesEncryptionCodec;
 import net.raphimc.viabedrock.netty.CompressionCodec;
+import net.raphimc.viabedrock.netty.raknet.AesEncryptionCodec;
 import net.raphimc.viabedrock.protocol.provider.NettyPipelineProvider;
 
 import javax.crypto.SecretKey;
