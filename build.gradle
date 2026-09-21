@@ -113,6 +113,14 @@ jar {
     }
 }
 
+remapJar {
+    archiveFileName = "ViaFabricPlusBackPort-1.21.4-byMr712.jar"
+}
+
+remapSourcesJar {
+    archiveFileName = "ViaFabricPlusBackPort-1.21.4-byMr712-sources.jar"
+}
+
 idea {
     module {
         ["run"].each {
