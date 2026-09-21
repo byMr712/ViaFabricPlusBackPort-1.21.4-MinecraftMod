@@ -25,15 +25,21 @@ import com.viaversion.viafabricplus.features.entity.metadata_handling.WolfHealth
 import com.viaversion.viafabricplus.protocoltranslator.ProtocolTranslator;
 import com.viaversion.viafabricplus.protocoltranslator.protocol.storage.BedrockJoinGameTracker;
 import com.viaversion.viaversion.api.connection.UserConnection;
-import com.viaversion.viaversion.api.protocol.AbstractSimpleProtocol;
+import com.viaversion.viaversion.api.protocol.AbstractProtocol;
 import com.viaversion.viaversion.api.protocol.packet.ClientboundPacketType;
 import com.viaversion.viaversion.api.protocol.packet.PacketWrapper;
 import com.viaversion.viaversion.api.protocol.packet.ServerboundPacketType;
 import com.viaversion.viaversion.api.protocol.packet.State;
+import com.viaversion.viaversion.api.protocol.packet.provider.PacketTypesProvider;
+import com.viaversion.viaversion.api.protocol.packet.provider.SimplePacketTypesProvider;
 import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
 import com.viaversion.viaversion.api.type.Types;
-import com.viaversion.viaversion.protocols.v1_21_2to1_21_4.packet.ServerboundPackets1_21_4;
-import com.viaversion.viaversion.protocols.v1_21to1_21_2.packet.ClientboundPackets1_21_2;
+import com.viaversion.viaversion.protocols.v1_21_11to26_1.packet.ClientboundPacket26_1;
+import com.viaversion.viaversion.protocols.v1_21_11to26_1.packet.ClientboundPackets26_1;
+import com.viaversion.viaversion.protocols.v1_21_11to26_1.packet.ServerboundPacket26_1;
+import com.viaversion.viaversion.protocols.v1_21_11to26_1.packet.ServerboundPackets26_1;
+import com.viaversion.viaversion.protocols.v1_21_7to1_21_9.packet.ClientboundConfigurationPackets1_21_9;
+import com.viaversion.viaversion.protocols.v1_21_7to1_21_9.packet.ServerboundConfigurationPackets1_21_9;
 import com.viaversion.viaversion.util.Key;
 import net.minecraft.network.packet.BrandCustomPayload;
 import net.minecraft.network.packet.CustomPayload;
@@ -47,14 +53,16 @@ import net.raphimc.vialegacy.api.LegacyProtocolVersion;
 import java.util.HashMap;
 import java.util.Map;
 
-// Protocol to handle error handling changes in older protocols, always last element of the pipeline
-public final class ViaFabricPlusProtocol extends AbstractSimpleProtocol {
+import static com.viaversion.viaversion.util.ProtocolUtil.packetTypeMap;
+
+public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPacket26_1, ClientboundPacket26_1, ServerboundPacket26_1, ServerboundPacket26_1> {
 
     public static final ViaFabricPlusProtocol INSTANCE = new ViaFabricPlusProtocol();
 
     private final Map<String, Pair<ProtocolVersion, PacketReader>> payloadDiff = new HashMap<>();
 
     public ViaFabricPlusProtocol() {
+        super(ClientboundPacket26_1.class, ClientboundPacket26_1.class, ServerboundPacket26_1.class, ServerboundPacket26_1.class);
         registerMapping(BrandCustomPayload.ID, LegacyProtocolVersion.c0_0_15a_1, wrapper -> wrapper.passthrough(Types.STRING));
         registerMapping(DebugGameTestAddMarkerCustomPayload.ID, ProtocolVersion.v1_14, wrapper -> {
             wrapper.passthrough(Types.BLOCK_POSITION1_14);
@@ -71,23 +79,16 @@ public final class ViaFabricPlusProtocol extends AbstractSimpleProtocol {
         registerClientbound(State.PLAY, getCustomPayload().getId(), getCustomPayload().getId(), wrapper -> {
             final String channel = Key.namespaced(wrapper.passthrough(Types.STRING));
             if (!channel.startsWith(Identifier.DEFAULT_NAMESPACE)) {
-                // Mods might add custom payloads that we don't want to filter, so we check for the namespace.
-                // Mods should NEVER use the default namespace of the game, not only to not break this code,
-                // but also to not break other mods and the game itself.
                 return;
             }
 
             final ProtocolVersion version = wrapper.user().getProtocolInfo().serverProtocolVersion();
             if (!payloadDiff.containsKey(channel) || version.olderThan(payloadDiff.get(channel).getLeft())) {
-                // Technically, it's wrong to just drop all payloads. However, ViaVersion doesn't translate them and the server can't detect if
-                // we handled the payload or not, so dropping them is easier than adding a bunch of useless translations for payloads
-                // which don't do anything on the client anyway.
                 wrapper.cancel();
                 return;
             }
 
             if (version.olderThanOrEqualTo(ProtocolVersion.v1_20)) {
-                // Skip all remaining bytes after reading the payload and cancel if the payload fails to read
                 final PacketReader reader = payloadDiff.get(channel).getRight();
                 try {
                     reader.read(wrapper);
@@ -105,7 +106,6 @@ public final class ViaFabricPlusProtocol extends AbstractSimpleProtocol {
 
         final ProtocolVersion serverVersion = ProtocolTranslator.getTargetVersion(connection.getChannel());
 
-        // Add storages we need for different fixes here
         if (serverVersion.equals(BedrockProtocolVersion.bedrockLatest)) {
             connection.put(new BedrockJoinGameTracker());
         } else if (serverVersion.olderThanOrEqualTo(ProtocolVersion.v1_14_4)) {
@@ -118,11 +118,21 @@ public final class ViaFabricPlusProtocol extends AbstractSimpleProtocol {
     }
 
     public static ServerboundPacketType getSetCreativeModeSlot() {
-        return ServerboundPackets1_21_4.SET_CREATIVE_MODE_SLOT;
+        return ServerboundPackets26_1.SET_CREATIVE_MODE_SLOT;
     }
 
     public static ClientboundPacketType getCustomPayload() {
-        return ClientboundPackets1_21_2.CUSTOM_PAYLOAD;
+        return ClientboundPackets26_1.CUSTOM_PAYLOAD;
+    }
+
+    @Override
+    protected PacketTypesProvider<ClientboundPacket26_1, ClientboundPacket26_1, ServerboundPacket26_1, ServerboundPacket26_1> createPacketTypesProvider() {
+        return new SimplePacketTypesProvider<>(
+            packetTypeMap(unmappedClientboundPacketType, ClientboundPackets26_1.class, ClientboundConfigurationPackets1_21_9.class),
+            packetTypeMap(mappedClientboundPacketType, ClientboundPackets26_1.class, ClientboundConfigurationPackets1_21_9.class),
+            packetTypeMap(mappedServerboundPacketType, ServerboundPackets26_1.class, ServerboundConfigurationPackets1_21_9.class),
+            packetTypeMap(unmappedServerboundPacketType, ServerboundPackets26_1.class, ServerboundConfigurationPackets1_21_9.class)
+        );
     }
 
     @FunctionalInterface

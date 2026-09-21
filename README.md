@@ -12,7 +12,7 @@
 
 > **Fork for Minecraft 1.21.4.** Ported by [byMr712](https://github.com/byMr712). In contrast to the original
 > ViaFabricPlus, which only supports the latest client, this fork keeps the 1.21.4 client while extending server
-> support up to **26.1**. Upstream: [ViaVersion/ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus).
+> support up to **26.2**. Upstream: [ViaVersion/ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus).
 
 </div>
 
@@ -28,12 +28,12 @@ legacy combat mechanics, movement, and rendering changes to make the gameplay fe
 
 **On the other hand, this fork supports only the 1.21.4 Minecraft client, and only Fabric.**
 This fork updates the bundled Via libraries, which allows connecting to servers of any supported version —
-from the first multiplayer version up to **26.1**. Original upstream functionality regarding legacy combat,
+from the first multiplayer version up to **26.2**. Original upstream functionality regarding legacy combat,
 movement, and rendering changes remains unchanged.
 
 ## Supported Server versions
 
-- Release (1.0.0 - 26.1)
+- Release (1.0.0 - 26.2)
 - Beta (b1.0 - b1.8.1)
 - Alpha (a1.0.15 - a1.2.6)
 - Classic (c0.0.15 - c0.30 including [CPE](https://wiki.vg/Classic_Protocol_Extension))
