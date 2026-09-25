@@ -35,12 +35,12 @@ import com.viaversion.viaversion.api.protocol.packet.provider.PacketTypesProvide
 import com.viaversion.viaversion.api.protocol.packet.provider.SimplePacketTypesProvider;
 import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
 import com.viaversion.viaversion.api.type.Types;
-import com.viaversion.viaversion.protocols.v1_21_7to1_21_9.packet.ServerboundConfigurationPackets1_21_9;
-import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ClientboundConfigurationPackets26_3;
-import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ClientboundPacket26_3;
-import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ClientboundPackets26_3;
-import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ServerboundPacket26_3;
-import com.viaversion.viaversion.protocols.v26_2to26_3.packet.ServerboundPackets26_3;
+import com.viaversion.viaversion.protocols.v1_20_3to1_20_5.packet.ServerboundConfigurationPackets1_20_5;
+import com.viaversion.viaversion.protocols.v1_20_5to1_21.packet.ClientboundConfigurationPackets1_21;
+import com.viaversion.viaversion.protocols.v1_21to1_21_2.packet.ClientboundPacket1_21_2;
+import com.viaversion.viaversion.protocols.v1_21to1_21_2.packet.ClientboundPackets1_21_2;
+import com.viaversion.viaversion.protocols.v1_21to1_21_2.packet.ServerboundPacket1_21_2;
+import com.viaversion.viaversion.protocols.v1_21to1_21_2.packet.ServerboundPackets1_21_2;
 import com.viaversion.viaversion.util.Key;
 import net.minecraft.network.packet.BrandCustomPayload;
 import net.minecraft.network.packet.CustomPayload;
@@ -58,14 +58,14 @@ import java.util.Map;
 
 import static com.viaversion.viaversion.util.ProtocolUtil.packetTypeMap;
 
-public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPacket26_3, ClientboundPacket26_3, ServerboundPacket26_3, ServerboundPacket26_3> {
+public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPacket1_21_2, ClientboundPacket1_21_2, ServerboundPacket1_21_2, ServerboundPacket1_21_2> {
 
     public static final ViaFabricPlusProtocol INSTANCE = new ViaFabricPlusProtocol();
 
     private final Map<String, Pair<ProtocolVersion, PacketReader>> payloadDiff = new HashMap<>();
 
     public ViaFabricPlusProtocol() {
-        super(ClientboundPacket26_3.class, ClientboundPacket26_3.class, ServerboundPacket26_3.class, ServerboundPacket26_3.class);
+        super(ClientboundPacket1_21_2.class, ClientboundPacket1_21_2.class, ServerboundPacket1_21_2.class, ServerboundPacket1_21_2.class);
         registerMapping(BrandCustomPayload.ID, LegacyProtocolVersion.c0_0_15a_1, wrapper -> wrapper.passthrough(Types.STRING));
         registerMapping(DebugGameTestAddMarkerCustomPayload.ID, ProtocolVersion.v1_14, wrapper -> {
             wrapper.passthrough(Types.BLOCK_POSITION1_14);
@@ -104,7 +104,7 @@ public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPac
 
         // Fixes an issue where the Fabric Particle API causes disconnects when both the client and server have the mod installed and both are 1.21.5+.
         // See https://github.com/ViaVersion/ViaFabric/issues/428
-        this.registerServerbound(ServerboundConfigurationPackets1_21_9.CUSTOM_PAYLOAD, wrapper -> {
+        this.registerServerbound(ServerboundConfigurationPackets1_20_5.CUSTOM_PAYLOAD, wrapper -> {
             final ProtocolVersion serverVersion = wrapper.user().getProtocolInfo().serverProtocolVersion();
             if (serverVersion.newerThanOrEqualTo(ProtocolVersion.v1_21_5) && !serverVersion.equals(wrapper.user().getProtocolInfo().protocolVersion())) {
                 final String channel = Key.namespaced(wrapper.passthrough(Types.STRING));
@@ -145,20 +145,20 @@ public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPac
     }
 
     public static ServerboundPacketType getSetCreativeModeSlot() {
-        return ServerboundPackets26_3.SET_CREATIVE_MODE_SLOT;
+        return ServerboundPackets1_21_2.SET_CREATIVE_MODE_SLOT;
     }
 
     public static ClientboundPacketType getCustomPayload() {
-        return ClientboundPackets26_3.CUSTOM_PAYLOAD;
+        return ClientboundPackets1_21_2.CUSTOM_PAYLOAD;
     }
 
     @Override
-    protected PacketTypesProvider<ClientboundPacket26_3, ClientboundPacket26_3, ServerboundPacket26_3, ServerboundPacket26_3> createPacketTypesProvider() {
+    protected PacketTypesProvider<ClientboundPacket1_21_2, ClientboundPacket1_21_2, ServerboundPacket1_21_2, ServerboundPacket1_21_2> createPacketTypesProvider() {
         return new SimplePacketTypesProvider<>(
-            packetTypeMap(unmappedClientboundPacketType, ClientboundPackets26_3.class, ClientboundConfigurationPackets26_3.class),
-            packetTypeMap(mappedClientboundPacketType, ClientboundPackets26_3.class, ClientboundConfigurationPackets26_3.class),
-            packetTypeMap(mappedServerboundPacketType, ServerboundPackets26_3.class, ServerboundConfigurationPackets1_21_9.class),
-            packetTypeMap(unmappedServerboundPacketType, ServerboundPackets26_3.class, ServerboundConfigurationPackets1_21_9.class)
+            packetTypeMap(unmappedClientboundPacketType, ClientboundPackets1_21_2.class, ClientboundConfigurationPackets1_21.class),
+            packetTypeMap(mappedClientboundPacketType, ClientboundPackets1_21_2.class, ClientboundConfigurationPackets1_21.class),
+            packetTypeMap(mappedServerboundPacketType, ServerboundPackets1_21_2.class, ServerboundConfigurationPackets1_20_5.class),
+            packetTypeMap(unmappedServerboundPacketType, ServerboundPackets1_21_2.class, ServerboundConfigurationPackets1_20_5.class)
         );
     }
 

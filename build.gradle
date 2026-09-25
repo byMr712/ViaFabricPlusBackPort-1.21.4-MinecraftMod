@@ -23,6 +23,8 @@ configurations {
     jij.extendsFrom vvDependencies
 }
 
+
+
 dependencies {
     // Fabric API
     modJij fabricApi.module("fabric-api-base", project.fabric_api_version)

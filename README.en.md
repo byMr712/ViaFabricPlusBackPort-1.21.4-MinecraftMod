@@ -19,6 +19,7 @@ Patch and backport for **Minecraft 1.21.4**:
 - In contrast to the upstream ViaFabricPlus which only targets the latest client release, this fork keeps the stable **1.21.4** client with all your mods while extending connection capabilities up to **26.3**.
 - Updated bundled protocol translation libraries (**ViaVersion**, **ViaBackwards**, **ViaRewind**).
 - Retains all signature QoL features and authentic legacy game mechanics (Legacy Combat, Movement fixes, block/entity collision fixes, and rendering tweaks).
+- Built-in compatibility modules (`compat`) for popular mods (Tide, Lithium, Inventory Profiles Next, Fabric API, etc.).
 - Added `build.bat` helper script.
 
 Support: **Fabric 1.21.4**.
@@ -61,5 +62,6 @@ The output jar will be located in `build/libs/`.
 
 ---
 
-## Disclaimer
-Server administrators and anti-cheat plugins may enforce rules regarding protocol translation mods. Use with caution on competitive public servers.
+## ⚠️ Disclaimer & Mod Compatibility
+- **Server Rules & Anti-Cheats**: Server administrators and anti-cheat plugins may enforce rules regarding protocol translation mods. Use with caution on competitive public servers.
+- **Content Mod Compatibility**: ViaFabricPlus emulates standard vanilla network protocols and bundles compatibility patches for known mods. However, complex third-party content mods that alter Minecraft's underlying network packets or registry lifecycles in non-standard ways may still encounter conflicts and might require specific compat patches or temporary disabling for multiplayer play.

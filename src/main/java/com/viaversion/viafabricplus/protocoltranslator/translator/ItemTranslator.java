@@ -74,7 +74,13 @@ public final class ItemTranslator {
         try {
             final Protocol<?, ?, ?, ?> sourceProtocol = connection.getProtocolInfo().getPipeline().reversedPipes().stream().filter(p -> !p.isBaseProtocol()).findFirst().orElseThrow();
             final PacketWrapper containerSetSlot = PacketWrapper.create(sourceProtocol.getPacketTypesProvider().unmappedClientboundType(State.PLAY, ClientboundPackets1_12_1.CONTAINER_SET_SLOT.getName()), connection);
-            if (sourceVersion.newerThanOrEqualTo(ProtocolVersion.v1_8)) {
+            if (sourceVersion.newerThanOrEqualTo(ProtocolVersion.v1_21_2)) {
+                containerSetSlot.write(Types.VAR_INT, 0); // window id
+                containerSetSlot.write(Types.VAR_INT, 0); // revision
+            } else if (sourceVersion.newerThanOrEqualTo(ProtocolVersion.v1_17_1)) {
+                containerSetSlot.write(Types.UNSIGNED_BYTE, (short) 0); // window id
+                containerSetSlot.write(Types.VAR_INT, 0); // state id
+            } else if (sourceVersion.newerThanOrEqualTo(ProtocolVersion.v1_8)) {
                 containerSetSlot.write(Types.UNSIGNED_BYTE, (short) 0); // window id
             } else {
                 containerSetSlot.write(Types.BYTE, (byte) 0); // window id
@@ -88,7 +94,7 @@ public final class ItemTranslator {
             containerSetSlot.setPacketType(null);
             containerSetSlot.writeToBuffer(buf);
 
-            buf.readUnsignedByte(); // sync id
+            buf.readVarInt(); // sync id
             buf.readVarInt(); // revision
             buf.readShort(); // slot
             return ItemStack.OPTIONAL_PACKET_CODEC.decode(buf);
