@@ -12,10 +12,11 @@
 
 ## Описание форка
 Все права принадлежат первоначальным разработчикам — [ViaVersion](https://github.com/ViaVersion) / [FlorianMichael](https://github.com/FlorianMichael) / [RaphiMC](https://github.com/RaphiMC).  
-Оригинальный репозиторий: [ViaVersion/ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus).
+Оригинальный репозиторий: [ViaVersion/ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus).  
+Бэкпорт, адаптация и поддержка версии для 1.21.4: **[byMr712](https://github.com/byMr712)**.
 
 Специальная сборка и бэкпорт для **Minecraft 1.21.4**:
-- Сборка мода **ViaFabricPlus** для клиента **Minecraft 1.21.4** под **Fabric** (Java 21).
+- Сборка мода **ViaFabricPlus** для клиента **Minecraft 1.21.4** под **Fabric** (Java 21) от **byMr712**.
 - В отличие от оригинального ViaFabricPlus, который поддерживает исключительно самый последний клиент игры, данный форк сохраняет стабильный клиент **1.21.4** со всеми вашими модами, расширяя поддержку подключения к новым серверам вплоть до **26.3**.
 - Обновлены встроенные библиотеки протоколов (**ViaVersion**, **ViaBackwards**, **ViaRewind**), что позволяет заходить на серверы любых доступных версий Java Edition.
 - Полностью сохранены все фирменные функции и QoL-исправления: аутентичная физика старых версий (Legacy Combat, Movement), исправления коллизий блоков и сущностей, изменения рендеринга и механик движения.

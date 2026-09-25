@@ -12,10 +12,11 @@
 
 ## Fork Information
 All rights belong to the original developers — [ViaVersion](https://github.com/ViaVersion) / [FlorianMichael](https://github.com/FlorianMichael) / [RaphiMC](https://github.com/RaphiMC).  
-Original repository: [ViaVersion/ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus).
+Original repository: [ViaVersion/ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus).  
+Backport, adaptation, and maintenance for 1.21.4 by **[byMr712](https://github.com/byMr712)**.
 
 Patch and backport for **Minecraft 1.21.4**:
-- Dedicated build of **ViaFabricPlus** for **Minecraft 1.21.4** on **Fabric** (Java 21).
+- Dedicated build of **ViaFabricPlus** for **Minecraft 1.21.4** on **Fabric** (Java 21) by **byMr712**.
 - In contrast to the upstream ViaFabricPlus which only targets the latest client release, this fork keeps the stable **1.21.4** client with all your mods while extending connection capabilities up to **26.3**.
 - Updated bundled protocol translation libraries (**ViaVersion**, **ViaBackwards**, **ViaRewind**).
 - Retains all signature QoL features and authentic legacy game mechanics (Legacy Combat, Movement fixes, block/entity collision fixes, and rendering tweaks).
