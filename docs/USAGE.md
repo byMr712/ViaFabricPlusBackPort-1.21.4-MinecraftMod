@@ -28,12 +28,12 @@ implemented:
 
 ### Settings<br>
 
-For users only the settings in the **General**, **Bedrock**, **Authentication** and **Visual** tab are relevant, the
+For users only the settings in the **General**, **Authentication** and **Visual** tab are relevant, the
 other settings are only for developers, you should not change the settings in the **Debug** tab if you don't know what
 you are doing.
 ![](preview/settings-selection.png)
 
-The settings are stored in the `settings.json` file. Account credentials for Bedrock/ClassiCube in `accounts.json`.
+The settings are stored in the `settings.json` file. Account credentials for ClassiCube in `accounts.json`.
 
 ### Configuring the protocol translation libraries
 
@@ -43,7 +43,6 @@ there depending on the platforms loaded:
 - `viaversion.yml` (ViaVersion)
 - `viabackwards.yml` (ViaBackwards)
 - `vialegacy.yml` (ViaLegacy)
-- `viabedrock.yml` (ViaBedrock)
 - `viaaprilfools.yml` (ViaAprilFools)
 
 On it's first launch, ViaFabricPlus will generate the config files with proper default values. Don't touch the config
@@ -54,19 +53,6 @@ files if you don't know what you are doing.
 The debug HUD can be enabled in the settings, it shows some useful information about the connection and the protocol
 translation.
 ![](preview/debug_hud.png)
-
-### Bedrock edition
-
-Keep in mind that the Java -> Bedrock support is still in beta phase, and therefore many things are not implemented
-yet and there is no guarantee that everything will work as it should.
-
-To log in to a Bedrock account you can press the button **"Click to set account for Bedrock edition"** in the settings.
-
-#### Bedrock Realms
-
-If you have a Bedrock account set in the settings, you can view its Bedrock Realms in the "Server lists" screen (can be
-found at the left bottom of the main GUI).
-![](preview/bedrock_realms.png)
 
 ### ClassiCube and BetaCraft integration
 

@@ -1,5 +1,4 @@
 {
-  "modmenu.descriptionTranslation.viafabricplus": "Fabric mod, mellyel MINDEN Minecraft szerververzióhoz (Release, Beta, Alpha, Classic, Snapshotok, Bedrock) csatlakozhatsz, életminőségi javításokkal a játékmenethez",
 
   "base.viafabricplus.settings": "Beállítások",
   "base.viafabricplus.on": "Be",
@@ -30,7 +29,6 @@
   "setting_group_name.viafabricplus.visual": "Vizuális",
   "setting_group_name.viafabricplus.debug": "Debug",
   "setting_group_name.viafabricplus.general": "Általános",
-  "setting_group_name.viafabricplus.bedrock": "Bedrock",
   
   "general_settings.viafabricplus.save_selected_protocol_version": "Kiválasztott protokoll verzió mentése",
   "general_settings.viafabricplus.extra_information_in_debug_hud": "Extra információ mutatása a Debug HUD-ban",
@@ -43,7 +41,6 @@
   "general_settings.viafabricplus.load_skins_and_skulls_in_legacy_versions": "Skinek és fejek betöltése elavult verziókban",
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "Felszerelési műveletek emulálása alpha verziókban",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "Kattints egy Bedrock Edition fiók beállításához",
 
   "debug_settings.viafabricplus.queue_config_packets": "Konfigurációs adatcsomagok várólistára állítása",
   "debug_settings.viafabricplus.disable_sequencing": "Szekvenálás kikapcsolása",
@@ -72,7 +69,6 @@
   "visual_settings.viafabricplus.old_walking_animation": "Régi séta animáció",
   "visual_settings.viafabricplus.swing_hand_on_item_use": "Blokkolás-ütés animáció bekapcsolása",
 
-  "bedrock.viafabricplus.login": "A böngésződnek meg kellett volna nyílnia.\nKérlek írd be a következő kódot: %s\nEzen képernyő bezárása megszakítja a folyamatot!",
   "authentication.viafabricplus.failed_to_verify_session": "A ViaFabricPlus nem tudta ellenőrizni a munkamenetet! Kérlek jelentkezz be egy Fiókba, vagy kapcsold ki a BetaCraft hitelesítést a ViaFabricPlus Beállításaiban",
 
   "classicube.viafabricplus.account": "Fiókot itt lehet létrehozni: https://www.classicube.net/",

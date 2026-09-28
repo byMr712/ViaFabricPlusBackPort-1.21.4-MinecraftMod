@@ -27,7 +27,6 @@
   "authentication_settings.viafabricplus.use_beta_craft_authentication": "ใช้ BetaCraft ยืนยันตัวตน",
   "authentication_settings.viafabricplus.verify_session_for_online_mode": "อนุญาติให้ ViaLegacy ในการเรียก joinServer() เพื่อยืนยัน",
   "authentication_settings.viafabricplus.fail": "ตัดการเชื่อมต่อหาก joinServer() ผิดพลาด",
-  "authentication_settings.viafabricplus.bedrock": "คลิกเพื่อเชื่อมต่อบัญชี Bedrock Edition",
 
   "visual_settings.viafabricplus.disable_secure_chat_warning": "ลบคำเตือนแชท",
   "visual_settings.viafabricplus.hide_signature_indicator": "ซ่อนตัวบ่งชี้ลายเซ็น",
@@ -40,8 +39,6 @@
   "visual_settings.viafabricplus.replace_creative_inventory_with_classic_inventory": "แทนที่ creative inventory",
   "visual_settings.viafabricplus.old_walking_animation": "ท่าทางการเดินแบบเก่า",
 
-  "bedrock.viafabricplus.login": "บราวเซอร์เปิดแล้ว \nกรุณาใส่โค้ด: %s\nหากปิดหน้าเกมการดำเนินการจะถูกยกเลิก",
-  "bedrocklogin.viafabricplus.error": "พบข้อผิดพลาด ดูที่ไฟล์ latest.log เพื่อดูรายละอียดเพิ่มเติม,\nกรุณาแจ้งบัคที่  \nhttps://github.com/ViaVersion/ViaFabricPlus/issues",
 
   "base.viafabricplus.force_version_title": "โปรดเลือกเวอร์ชันที่ต้องการเชื่อมต่อ"
 }

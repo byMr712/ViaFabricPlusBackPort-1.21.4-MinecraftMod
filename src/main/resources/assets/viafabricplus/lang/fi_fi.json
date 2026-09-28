@@ -37,7 +37,6 @@
   "authentication_settings.viafabricplus.automatically_select_cpe_when_using_classicube": "Pakota CPE-version jos käytetään ClassiCube:a",
   "authentication_settings.viafabricplus.set_session_name_to_classicube_name": "Huijaa pelinimi ClassiCube-nimeksi, jos käytetään ClassiCube:a",
   "authentication_settings.viafabricplus.load_skins_in_legacy_versions": "Salli ViaLegacy:n ladata skinejä vanhoissa versioissa",
-  "authentication_settings.viafabricplus.bedrock": "Paina asettaaksesi Bedrock-käyttäjäm",
   "authentication_settings.viafabricplus.failed_to_verify_session": "ViaFabricPlus epäonnistui istuntosi todentamisessa! Kirjaudu käyttäjälle, tai poista BetaCraft -todennus käytöstä ViaFabricPlus:n asetuksissa.",
 
   "visual_settings.viafabricplus.disable_secure_chat_warning": "Poista turvallinen-chat -varoitus",
@@ -52,8 +51,6 @@
   "visual_settings.viafabricplus.old_walking_animation": "Vanha kävely-animaatio",
   "visual_settings.viafabricplus.sodium": "Korjaa Sodium:in chunk-renderöijä",
 
-  "bedrock.viafabricplus.login": "Selaimesi taisi aueta.\nKirjoita seuraava koodi: %s\nNäytön sulkeminen aiheuttaa prosessin loppumisen!",
-  "bedrocklogin.viafabricplus.error": "Virhe tapahtui! Katso latest.log lisätietoja varten,\nole hyvä, ja raportoi bugi täällä: \nhttps://github.com/ViaVersion/ViaFabricPlus/issues",
 
   "base.viafabricplus.force_version_title": "Ole hyvä ja valitse versio, jolla palvelimelle pitäisi liittyä",
 

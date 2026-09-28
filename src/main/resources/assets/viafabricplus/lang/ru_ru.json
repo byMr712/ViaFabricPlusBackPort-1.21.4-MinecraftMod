@@ -1,6 +1,5 @@
 {
   "modmenu.summaryTranslation.viafabricplus": "Мод для подключения к серверам любых версий.",
-  "modmenu.descriptionTranslation.viafabricplus": "Мод для Fabric, предназначенный для подключения к серверам §lлюбых§r версий Minecraft (Classic, Alpha, Beta, снапшотам, релизам и даже Bedrock) с исправлениями для улучшения игрового процесса.",
 
   "base.viafabricplus.settings": "Настройки",
   "base.viafabricplus.on": "Вкл",
@@ -37,7 +36,6 @@
   "setting_group_name.viafabricplus.visual": "Внешний вид",
   "setting_group_name.viafabricplus.debug": "Отладка",
   "setting_group_name.viafabricplus.general": "Основные",
-  "setting_group_name.viafabricplus.bedrock": "Bedrock",
 
   "screen.viafabricplus.force_version": "Меню принудительного выбора версии сервера",
   "screen.viafabricplus.report_issues": "Меню обратной связи",
@@ -45,7 +43,6 @@
   "screen.viafabricplus.classicube_login": "Вход в Classicube",
   "screen.viafabricplus.classicube_mfa": "Classicube MFA",
   "screen.viafabricplus.settings": "Настройки",
-  "screen.viafabricplus.bedrock_realms": "Bedrock Realms",
   "screen.viafabricplus.accept_invite": "Принять приглашение",
 
   "general_settings.viafabricplus.save_selected_protocol_version": "Сохранять выбранную версию протокола",
@@ -61,8 +58,6 @@
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "Эмулировать действия в инвентаре в alpha-версиях",
   "general_settings.viafabricplus.save_scroll_position_in_slot_screens": "Запоминать позицию прокрутки в настройках ViaFabricPlus",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "Нажмите для настройки учётной записи Bedrock Edition",
-  "bedrock_settings.viafabricplus.replace_default_port": "Заменить порт по умолчанию в списке серверов",
 
   "debug_settings.viafabricplus.queue_config_packets": "Очередь пакетов этапа настройки",
   "debug_settings.viafabricplus.disable_sequencing": "Отключить последовательность",
@@ -104,8 +99,6 @@
 
   "force_version.viafabricplus.title": "Укажите версию для проверки связи с сервером и подключения к нему.",
 
-  "click_to_set_bedrock_account.viafabricplus.notice": "Сейчас должен открыться браузер.\nЗакрытие этого экрана приведёт к отмене процесса авторизации.",
-  "click_to_set_bedrock_account.viafabricplus.display": "Учётная запись Bedrock: %s",
 
   "change_game_menu_screen_layout.viafabricplus.authentic": "Аутентичное",
   "change_game_menu_screen_layout.viafabricplus.adjusted": "Адаптированное",
@@ -140,23 +133,7 @@
   "classic4j_library.viafabricplus.error.username": "Неверное имя пользователя.",
   "classic4j_library.viafabricplus.error.password": "Неверный пароль.",
   "classic4j_library.viafabricplus.error.verification": "Пользователь ещё не подтвердил свой адрес электронной почты.",
-  "classic4j_library.viafabricplus.error.logincode": "Запрошена многофакторная аутентификация. Проверьте вашу электронную почту.",
+  "classic4j_library.viafabricplus.error.logincode": "Запрошена многофакторная аутентификация. Проверьте вашу электронную почту."
 
-  "minecraftauth_library.viafabricplus.xbldevicetoken": "Аутентификация устройства в Xbox Live...",
-  "minecraftauth_library.viafabricplus.xblsisuauthentication": "Аутентификация в Xbox Live через SISU...",
-  "minecraftauth_library.viafabricplus.mcchain": "Аутентификация в Minecraft Services...",
-  "minecraftauth_library.viafabricplus.xblxststoken": "Запрос XSTS-токена...",
-  "minecraftauth_library.viafabricplus.playfabtoken": "Аутентификация в PlayFab...",
-  "minecraftauth_library.viafabricplus.realmsxsts": "Запрос XSTS-токена Realms...",
 
-  "bedrock_realms.viafabricplus.warning": "Эта функция требует добавления учётной записи Bedrock Edition в настройках ViaFabricPlus.",
-  "bedrock_realms.viafabricplus.availability_check": "Проверка доступа...",
-  "bedrock_realms.viafabricplus.no_worlds": "Миров не найдено :(",
-  "bedrock_realms.viafabricplus.unavailable": "Версия ViaFabricPlus устарела и несовместима с Minecraft Realms.",
-  "bedrock_realms.viafabricplus.error": "Произошла ошибка, проверьте журнал для получения подробностей",
-  "bedrock_realms.viafabricplus.join": "Открыть реалм",
-  "bedrock_realms.viafabricplus.leave": "Покинуть реалм",
-  "bedrock_realms.viafabricplus.invite": "Добавить код реалма",
-  "bedrock_realms.viafabricplus.expired": "Реалм просрочен",
-  "bedrock_realms.viafabricplus.incompatible": "Версия вашего клиента не совпадает с версией Realms"
 }

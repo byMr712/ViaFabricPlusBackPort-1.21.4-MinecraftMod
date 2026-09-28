@@ -25,7 +25,6 @@ import com.viaversion.viafabricplus.api.events.LoadingCycleCallback;
 import com.viaversion.viafabricplus.api.settings.SettingGroup;
 import com.viaversion.viafabricplus.base.Events;
 import com.viaversion.viafabricplus.settings.impl.AuthenticationSettings;
-import com.viaversion.viafabricplus.settings.impl.BedrockSettings;
 import com.viaversion.viafabricplus.settings.impl.DebugSettings;
 import com.viaversion.viafabricplus.settings.impl.GeneralSettings;
 
@@ -44,7 +43,6 @@ public final class SettingsManager {
 
         addGroup(
                 GeneralSettings.INSTANCE,
-                BedrockSettings.INSTANCE,
                 AuthenticationSettings.INSTANCE,
                 DebugSettings.INSTANCE
         );

@@ -36,7 +36,6 @@
   "setting_group_name.viafabricplus.visual": "視覺",
   "setting_group_name.viafabricplus.debug": "除錯",
   "setting_group_name.viafabricplus.general": "一般",
-  "setting_group_name.viafabricplus.bedrock": "基岩版",
 
   "screen.viafabricplus.force_version": "強制使用設定版本",
   "screen.viafabricplus.report_issues": "回報問題",
@@ -44,7 +43,6 @@
   "screen.viafabricplus.classicube_login": "Classicube 登入",
   "screen.viafabricplus.classicube_mfa": "Classicube MFA",
   "screen.viafabricplus.settings": "設定",
-  "screen.viafabricplus.bedrock_realms": "基岩版 Realms",
   "screen.viafabricplus.accept_invite": "接受邀請",
 
   "general_settings.viafabricplus.save_selected_protocol_version": "儲存選擇的版本",
@@ -60,8 +58,6 @@
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "模擬 Alpha 版本物品欄動作",
   "general_settings.viafabricplus.save_scroll_position_in_slot_screens": "儲存容器畫面捲動位置",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "點選以設定基岩版帳號",
-  "bedrock_settings.viafabricplus.replace_default_port": "在伺服器清單中取代預設連接埠",
 
   "debug_settings.viafabricplus.queue_config_packets": "佇列設定封包",
   "debug_settings.viafabricplus.disable_sequencing": "停用排序",
@@ -110,8 +106,6 @@
 
   "force_version.viafabricplus.title": "請選擇用於 Ping／連線伺服器的版本",
 
-  "click_to_set_bedrock_account.viafabricplus.notice": "您的瀏覽器應該已經開啟。\n請輸入以下代碼：%s\n關閉這個畫面將取消流程！",
-  "click_to_set_bedrock_account.viafabricplus.display": "基岩版帳號：%s",
 
   "change_game_menu_screen_layout.viafabricplus.authentic": "原版",
   "change_game_menu_screen_layout.viafabricplus.adjusted": "調整後",
@@ -146,23 +140,7 @@
   "classic4j_library.viafabricplus.error.username": "無效的使用者名稱。",
   "classic4j_library.viafabricplus.error.password": "無效的密碼。",
   "classic4j_library.viafabricplus.error.verification": "使用者尚未驗證電子郵件地址。",
-  "classic4j_library.viafabricplus.error.logincode": "要求多重要素驗證。請檢查您的電子郵件。",
+  "classic4j_library.viafabricplus.error.logincode": "要求多重要素驗證。請檢查您的電子郵件。"
 
-  "minecraftauth_library.viafabricplus.xbldevicetoken": "正在 Xbox Live 驗證...",
-  "minecraftauth_library.viafabricplus.xblsisuauthentication": "正在使用 SISU 驗證 Xbox Live...",
-  "minecraftauth_library.viafabricplus.mcchain": "正在與 Minecraft 線上伺服器驗證...",
-  "minecraftauth_library.viafabricplus.xblxststoken": "正在請求 XSTS 權杖...",
-  "minecraftauth_library.viafabricplus.playfabtoken": "正在驗證 PlayFab...",
-  "minecraftauth_library.viafabricplus.realmsxsts": "正在請求 Realms XSTS 權杖...",
 
-  "bedrock_realms.viafabricplus.warning": "此功能需要在設定中設定基岩版帳號！",
-  "bedrock_realms.viafabricplus.availability_check": "正在檢查可用性...",
-  "bedrock_realms.viafabricplus.no_worlds": "找不到世界 :(",
-  "bedrock_realms.viafabricplus.unavailable": "您的 ViaFabricPlus 版本已過時，與 Minecraft Realms 不相容。",
-  "bedrock_realms.viafabricplus.error": "發生錯誤，請查看記錄檔以獲取更多資訊",
-  "bedrock_realms.viafabricplus.join": "加入 Realm",
-  "bedrock_realms.viafabricplus.leave": "離開 Realm",
-  "bedrock_realms.viafabricplus.invite": "接受邀請碼",
-  "bedrock_realms.viafabricplus.expired": "Realm 已過期",
-  "bedrock_realms.viafabricplus.incompatible": "Realms 的 Minecraft 版本太舊或太新"
 }

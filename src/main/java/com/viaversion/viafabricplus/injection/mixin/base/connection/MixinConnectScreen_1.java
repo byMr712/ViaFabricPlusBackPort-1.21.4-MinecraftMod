@@ -31,7 +31,7 @@ public abstract class MixinConnectScreen_1 {
 
     @WrapOperation(method = "run", at = @At(value = "INVOKE", target = "Ljava/lang/Exception;getMessage()Ljava/lang/String;", remap = false))
     private String handleNullExceptionMessage(Exception instance, Operation<String> original) {
-        // Vanilla doesn't have these cases, but we do because of RakNet and other modifications to the Netty pipeline
+        // Vanilla doesn't have these cases, but we do because of the other modifications to the Netty pipeline
         return instance.getMessage() == null ? "" : original.call(instance);
     }
 

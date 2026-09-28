@@ -33,7 +33,6 @@
   "setting_group_name.viafabricplus.visual": "視",
   "setting_group_name.viafabricplus.debug": "勘",
   "setting_group_name.viafabricplus.general": "常",
-  "setting_group_name.viafabricplus.bedrock": "基石版",
 
   "screen.viafabricplus.force_version": "強用版",
   "screen.viafabricplus.report_issues": "報誤",
@@ -55,8 +54,6 @@
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "擬首測版行囊之動作",
   "general_settings.viafabricplus.save_scroll_position_in_slot_screens": "存槽戶之捲覽方位",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "擊以設基石版之戶簿",
-  "bedrock_settings.viafabricplus.replace_default_port": "替伺服器之列預置埠",
 
   "debug_settings.viafabricplus.queue_config_packets": "佇列置囊",
   "debug_settings.viafabricplus.disable_sequencing": "禁序",
@@ -98,8 +95,6 @@
 
   "force_version.viafabricplus.title": "請擇所欲通之伺服器版",
 
-  "click_to_set_bedrock_account.viafabricplus.notice": "汝之瀏覽器當既啟。\n爾旦閉此幕將罷之！",
-  "click_to_set_bedrock_account.viafabricplus.display": "基石版之戶簿：%s",
 
   "change_game_menu_screen_layout.viafabricplus.authentic": "原版",
   "change_game_menu_screen_layout.viafabricplus.adjusted": "既調",
@@ -134,11 +129,6 @@
   "classic4j_library.viafabricplus.error.username": "是名無效。",
   "classic4j_library.viafabricplus.error.password": "是符節無效。",
   "classic4j_library.viafabricplus.error.verification": "使用者猶未證其電子郵驛。",
-  "classic4j_library.viafabricplus.error.logincode": "既求重驗。請檢行電子郵驛。",
+  "classic4j_library.viafabricplus.error.logincode": "既求重驗。請檢行電子郵驛。"
 
-  "minecraftauth_library.viafabricplus.xbldevicetoken": "方驗設備以Xbox在綫",
-  "minecraftauth_library.viafabricplus.xblsisuauthentication": "方驗Xbox在綫以SISU",
-  "minecraftauth_library.viafabricplus.mcchain": "方驗礦藝服務",
-  "minecraftauth_library.viafabricplus.xblxststoken": "方求XSTS之令",
-  "minecraftauth_library.viafabricplus.playfabtoken": "方驗PlayFab"
 }

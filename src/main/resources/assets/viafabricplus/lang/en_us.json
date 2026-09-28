@@ -1,5 +1,4 @@
 {
-  "modmenu.descriptionTranslation.viafabricplus": "Fabric mod to connect to EVERY Minecraft server version (Release, Beta, Alpha, Classic, Snapshots, Bedrock) with QoL fixes to the gameplay",
 
   "base.viafabricplus.settings": "Settings",
   "base.viafabricplus.on": "On",
@@ -36,7 +35,6 @@
   "setting_group_name.viafabricplus.visual": "Visual",
   "setting_group_name.viafabricplus.debug": "Debug",
   "setting_group_name.viafabricplus.general": "General",
-  "setting_group_name.viafabricplus.bedrock": "Bedrock",
 
   "screen.viafabricplus.force_version": "Force Version",
   "screen.viafabricplus.report_issues": "Report issues",
@@ -44,7 +42,6 @@
   "screen.viafabricplus.classicube_login": "Classicube Login",
   "screen.viafabricplus.classicube_mfa": "Classicube MFA",
   "screen.viafabricplus.settings": "Settings",
-  "screen.viafabricplus.bedrock_realms": "Bedrock Realms",
   "screen.viafabricplus.accept_invite": "Accept Invite",
 
   "general_settings.viafabricplus.save_selected_protocol_version": "Save selected protocol version",
@@ -60,8 +57,6 @@
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "Emulate inventory actions in alpha versions",
   "general_settings.viafabricplus.save_scroll_position_in_slot_screens": "Save scroll position in slot screens",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "Click to set account for Bedrock Edition",
-  "bedrock_settings.viafabricplus.replace_default_port": "Replace default port in server list",
 
   "debug_settings.viafabricplus.queue_config_packets": "Queue config packets",
   "debug_settings.viafabricplus.disable_sequencing": "Disable sequencing",
@@ -110,8 +105,6 @@
 
   "force_version.viafabricplus.title": "Please select the version with which the server should be pinged/connected",
 
-  "click_to_set_bedrock_account.viafabricplus.notice": "Your browser should have opened.\nClosing this screen will cancel the process!",
-  "click_to_set_bedrock_account.viafabricplus.display": "Bedrock account: %s",
 
   "change_game_menu_screen_layout.viafabricplus.authentic": "Authentic",
   "change_game_menu_screen_layout.viafabricplus.adjusted": "Adjusted",
@@ -146,23 +139,7 @@
   "classic4j_library.viafabricplus.error.username": "Invalid username.",
   "classic4j_library.viafabricplus.error.password": "Invalid password.",
   "classic4j_library.viafabricplus.error.verification": "User hasn't verified their email address yet.",
-  "classic4j_library.viafabricplus.error.logincode": "Multi-factor authentication requested. Please check your email.",
+  "classic4j_library.viafabricplus.error.logincode": "Multi-factor authentication requested. Please check your email."
 
-  "minecraftauth_library.viafabricplus.xbldevicetoken": "Authenticating device with Xbox Live...",
-  "minecraftauth_library.viafabricplus.xblsisuauthentication": "Authenticating with Xbox Live using SISU...",
-  "minecraftauth_library.viafabricplus.mcchain": "Authenticating with Minecraft Services...",
-  "minecraftauth_library.viafabricplus.xblxststoken": "Requesting XSTS Token...",
-  "minecraftauth_library.viafabricplus.playfabtoken": "Authenticating with PlayFab...",
-  "minecraftauth_library.viafabricplus.realmsxsts": "Requesting Realms XSTS Token...",
 
-  "bedrock_realms.viafabricplus.warning": "This feature requires a Bedrock Edition account to be set in the settings!",
-  "bedrock_realms.viafabricplus.availability_check": "Checking availability...",
-  "bedrock_realms.viafabricplus.no_worlds": "No worlds found :(",
-  "bedrock_realms.viafabricplus.unavailable": "Your ViaFabricPlus is outdated and not compatible with Minecraft Realms.",
-  "bedrock_realms.viafabricplus.error": "An error occurred, see the logs for more information",
-  "bedrock_realms.viafabricplus.join": "Join realm",
-  "bedrock_realms.viafabricplus.leave": "Leave realm",
-  "bedrock_realms.viafabricplus.invite": "Accept invite code",
-  "bedrock_realms.viafabricplus.expired": "The Realm is expired",
-  "bedrock_realms.viafabricplus.incompatible": "The Realms Minecraft version is either too old or too new"
 }

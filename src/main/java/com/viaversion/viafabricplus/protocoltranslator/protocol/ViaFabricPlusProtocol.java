@@ -24,7 +24,6 @@ package com.viaversion.viafabricplus.protocoltranslator.protocol;
 import com.google.common.collect.Lists;
 import com.viaversion.viafabricplus.features.entity.metadata_handling.WolfHealthTracker1_14_4;
 import com.viaversion.viafabricplus.protocoltranslator.ProtocolTranslator;
-import com.viaversion.viafabricplus.protocoltranslator.protocol.storage.BedrockJoinGameTracker;
 import com.viaversion.viaversion.api.connection.UserConnection;
 import com.viaversion.viaversion.api.protocol.AbstractProtocol;
 import com.viaversion.viaversion.api.protocol.packet.ClientboundPacketType;
@@ -48,7 +47,6 @@ import net.minecraft.network.packet.s2c.custom.DebugGameTestAddMarkerCustomPaylo
 import net.minecraft.network.packet.s2c.custom.DebugGameTestClearCustomPayload;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import net.raphimc.viabedrock.api.BedrockProtocolVersion;
 import net.raphimc.vialegacy.api.LegacyProtocolVersion;
 
 import java.nio.charset.StandardCharsets;
@@ -128,9 +126,7 @@ public final class ViaFabricPlusProtocol extends AbstractProtocol<ClientboundPac
 
         final ProtocolVersion serverVersion = ProtocolTranslator.getTargetVersion(connection.getChannel());
 
-        if (serverVersion.equals(BedrockProtocolVersion.bedrockLatest)) {
-            connection.put(new BedrockJoinGameTracker());
-        } else if (serverVersion.olderThanOrEqualTo(ProtocolVersion.v1_14_4)) {
+        if (serverVersion.olderThanOrEqualTo(ProtocolVersion.v1_14_4)) {
             connection.put(new WolfHealthTracker1_14_4());
         }
     }

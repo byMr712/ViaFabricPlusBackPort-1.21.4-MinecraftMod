@@ -22,30 +22,17 @@
 package com.viaversion.viafabricplus.injection.mixin.base.connection;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.viaversion.viafabricplus.injection.access.base.IClientConnection;
 import com.viaversion.viafabricplus.injection.access.base.IMultiValueDebugSampleLogImpl;
 import com.viaversion.viafabricplus.protocoltranslator.ProtocolTranslator;
-import com.viaversion.viafabricplus.protocoltranslator.netty.ViaFabricPlusVLLegacyPipeline;
 import com.viaversion.vialoader.netty.CompressionReorderEvent;
 import com.viaversion.vialoader.netty.VLLegacyPipeline;
-import com.viaversion.vialoader.netty.VLPipeline;
-import com.viaversion.vialoader.netty.viabedrock.RakNetPingEncapsulationCodec;
 import com.viaversion.viaversion.api.connection.UserConnection;
 import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
-import io.netty.bootstrap.AbstractBootstrap;
-import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.channel.epoll.EpollDatagramChannel;
-import io.netty.channel.epoll.EpollSocketChannel;
-import io.netty.channel.socket.nio.NioDatagramChannel;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import javax.crypto.Cipher;
 import net.minecraft.network.ClientConnection;
@@ -54,16 +41,12 @@ import net.minecraft.network.encryption.PacketEncryptor;
 import net.minecraft.network.handler.HandlerNames;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.util.profiler.MultiValueDebugSampleLogImpl;
-import net.raphimc.viabedrock.api.BedrockProtocolVersion;
 import net.raphimc.vialegacy.api.LegacyProtocolVersion;
-import org.cloudburstmc.netty.channel.raknet.RakChannelFactory;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -75,9 +58,6 @@ public abstract class MixinClientConnection extends SimpleChannelInboundHandler<
 
     @Shadow
     private boolean encrypted;
-
-    @Shadow
-    public abstract void channelActive(@NotNull ChannelHandlerContext context) throws Exception;
 
     @Unique
     private UserConnection viaFabricPlus$userConnection;
@@ -115,19 +95,6 @@ public abstract class MixinClientConnection extends SimpleChannelInboundHandler<
         }
     }
 
-    @Override
-    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-        super.channelRegistered(ctx);
-        if (BedrockProtocolVersion.bedrockLatest.equals(this.viaFabricPlus$serverVersion)) { // Call channelActive manually when the channel is registered
-            this.channelActive(ctx);
-        }
-    }
-
-    @WrapWithCondition(method = "channelActive", at = @At(value = "INVOKE", target = "Lio/netty/channel/SimpleChannelInboundHandler;channelActive(Lio/netty/channel/ChannelHandlerContext;)V", remap = false))
-    private boolean dontCallChannelActiveTwice(SimpleChannelInboundHandler<Packet<?>> instance, ChannelHandlerContext channelHandlerContext) {
-        return !BedrockProtocolVersion.bedrockLatest.equals(this.viaFabricPlus$serverVersion);
-    }
-
     @Inject(method = "connect(Ljava/net/InetSocketAddress;ZLnet/minecraft/util/profiler/MultiValueDebugSampleLogImpl;)Lnet/minecraft/network/ClientConnection;", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/ClientConnection;connect(Ljava/net/InetSocketAddress;ZLnet/minecraft/network/ClientConnection;)Lio/netty/channel/ChannelFuture;"))
     private static void setTargetVersion(InetSocketAddress address, boolean useEpoll, MultiValueDebugSampleLogImpl packetSizeLog, CallbackInfoReturnable<ClientConnection> cir, @Local ClientConnection clientConnection) {
         // Set the target version stored in the PerformanceLog field to the ClientConnection instance
@@ -153,35 +120,6 @@ public abstract class MixinClientConnection extends SimpleChannelInboundHandler<
         }
 
         ((IClientConnection) connection).viaFabricPlus$setTargetVersion(targetVersion);
-    }
-
-    @WrapOperation(method = "connect(Ljava/net/InetSocketAddress;ZLnet/minecraft/network/ClientConnection;)Lio/netty/channel/ChannelFuture;", at = @At(value = "INVOKE", target = "Lio/netty/bootstrap/Bootstrap;channel(Ljava/lang/Class;)Lio/netty/bootstrap/AbstractBootstrap;", remap = false))
-    private static AbstractBootstrap<?, ?> useRakNetChannelFactory(Bootstrap instance, Class<? extends Channel> channelTypeClass, Operation<AbstractBootstrap<Bootstrap, Channel>> original, @Local(argsOnly = true) ClientConnection clientConnection) {
-        if (BedrockProtocolVersion.bedrockLatest.equals(((IClientConnection) clientConnection).viaFabricPlus$getTargetVersion())) {
-            return instance.channelFactory(channelTypeClass == EpollSocketChannel.class ? RakChannelFactory.client(EpollDatagramChannel.class) : RakChannelFactory.client(NioDatagramChannel.class));
-        } else {
-            return original.call(instance, channelTypeClass);
-        }
-    }
-
-    @Redirect(method = "connect(Ljava/net/InetSocketAddress;ZLnet/minecraft/network/ClientConnection;)Lio/netty/channel/ChannelFuture;", at = @At(value = "INVOKE", target = "Lio/netty/bootstrap/Bootstrap;connect(Ljava/net/InetAddress;I)Lio/netty/channel/ChannelFuture;", remap = false))
-    private static ChannelFuture useRakNetPingHandlers(Bootstrap instance, InetAddress inetHost, int inetPort, @Local(argsOnly = true) ClientConnection clientConnection, @Local(argsOnly = true) boolean isConnecting) {
-        if (BedrockProtocolVersion.bedrockLatest.equals(((IClientConnection) clientConnection).viaFabricPlus$getTargetVersion()) && !isConnecting) {
-            // Bedrock edition / RakNet has different handlers for pinging a server
-            return instance.register().syncUninterruptibly().channel().bind(new InetSocketAddress(0)).addListeners(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE, (ChannelFutureListener) f -> {
-                if (f.isSuccess()) {
-                    f.channel().pipeline().replace(
-                            VLPipeline.VIABEDROCK_RAKNET_MESSAGE_CODEC_NAME,
-                            ViaFabricPlusVLLegacyPipeline.VIABEDROCK_PING_ENCAPSULATION_HANDLER_NAME,
-                            new RakNetPingEncapsulationCodec(new InetSocketAddress(inetHost, inetPort))
-                    );
-                    f.channel().pipeline().remove(VLPipeline.VIABEDROCK_PACKET_CODEC_NAME);
-                    f.channel().pipeline().remove(HandlerNames.SPLITTER);
-                }
-            });
-        } else {
-            return instance.connect(inetHost, inetPort);
-        }
     }
 
     @Override

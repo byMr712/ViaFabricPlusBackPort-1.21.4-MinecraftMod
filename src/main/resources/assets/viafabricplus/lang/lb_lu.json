@@ -1,5 +1,4 @@
 {
-  "modmenu.descriptionTranslation.viafabricplus": "Fabric-Mod zum Verbannen mat ALL Minecraft-Serverversioun (Release, Alpha, Beta, Classic, Snapshots, Bedrock) mat QoL-Verbesserungen zum Spielverhaalen",
 
   "base.viafabricplus.settings": "Astellungen",
   "base.viafabricplus.on": "Un",
@@ -31,7 +30,6 @@
   "setting_group_name.viafabricplus.visual": "Visuell",
   "setting_group_name.viafabricplus.debug": "Debuggen",
   "setting_group_name.viafabricplus.general": "Allgemeng",
-  "setting_group_name.viafabricplus.bedrock": "Bedrock",
 
   "general_settings.viafabricplus.save_selected_protocol_version": "Ausgewielte Protokollversion späichern",
   "general_settings.viafabricplus.extra_information_in_debug_hud": "Zousätzlech Informationen am Debug-HUD uweisen",
@@ -45,8 +43,6 @@
   "general_settings.viafabricplus.load_skins_and_skulls_in_legacy_versions": "Skins an Schädel an aalen Versiounen lueden",
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "Inventaraktiounen an Alpha-Versionen emulieren",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "Klick, em den Account für dBedrock-Edition anzustellen",
-  "bedrock_settings.viafabricplus.replace_default_port": "Standardport in der Serverliste ersetzen",
 
   "debug_settings.viafabricplus.queue_config_packets": "Konfiguratiounspäckecher an Waardeschlaang anreihen",
   "debug_settings.viafabricplus.disable_sequencing": "Sequenzierung deaktiveieren",
@@ -84,7 +80,6 @@
   "visual_settings.viafabricplus.hide_crafting_recipe_book": "Bastelrezeptbuch verstoppen",
   "visual_settings.viafabricplus.hide_modern_jigsaw_screen_features": "Modern Puzzle-Funktiounen ausblenden",
 
-  "bedrock.viafabricplus.login": "Däin Browser misst opgaang sinn.\nWann du den Bildschirm hei zou messt brechst du den viergang oof!",
   "authentication.viafabricplus.failed_to_verify_session": "ViaFabricPlus konnt deng Setzung net verifizeieren! W.e.g. logg dech an en Account an oder deaktivier dBetaCraft-Authentifizeierung an den ViaFabricPlus-Astellungen.",
 
   "report.viafabricplus.button": "Problemer mellen",

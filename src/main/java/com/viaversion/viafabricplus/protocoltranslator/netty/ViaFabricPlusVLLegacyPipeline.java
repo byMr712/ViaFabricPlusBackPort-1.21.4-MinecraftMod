@@ -35,10 +35,6 @@ public final class ViaFabricPlusVLLegacyPipeline extends VLLegacyPipeline {
 
     public static final String VIA_FLOW_CONTROL = "via-flow-control";
 
-    public static final String VIABEDROCK_COMPRESSION_HANDLER_NAME = "viabedrock-compression";
-    public static final String VIABEDROCK_ENCRYPTION_HANDLER_NAME = "viabedrock-encryption";
-    public static final String VIABEDROCK_PING_ENCAPSULATION_HANDLER_NAME = "viabedrock-ping-encapsulation";
-
     public ViaFabricPlusVLLegacyPipeline(UserConnection connection, ProtocolVersion version) {
         super(connection, version);
     }

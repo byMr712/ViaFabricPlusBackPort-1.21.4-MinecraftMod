@@ -1,5 +1,4 @@
 {
-  "modmenu.descriptionTranslation.viafabricplus": "Mod de fabric para conectarse a CUALQUIER servidor de minecraft (Lanzamientos, Beta, Alpha, Classic, Snapshots, Bedrock) con fixes QoL en el juego",
 
   "base.viafabricplus.settings": "Ajustes",
   "base.viafabricplus.on": "Sí",
@@ -31,7 +30,6 @@
   "setting_group_name.viafabricplus.visual": "Visual",
   "setting_group_name.viafabricplus.debug": "depuración",
   "setting_group_name.viafabricplus.general": "General",
-  "setting_group_name.viafabricplus.bedrock": "Bedrock",
 
   "general_settings.viafabricplus.save_selected_protocol_version": "guardar versión de protocolo",
   "general_settings.viafabricplus.extra_information_in_debug_hud": "Mostrar información extra en el Hud de depuración",
@@ -45,7 +43,6 @@
   "general_settings.viafabricplus.load_skins_and_skulls_in_legacy_versions": "cargar skins y cabezas en versiones legacy",
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "emular acciones de inventario en versiones alpha",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "Click para asignar cuenta de Bedrock",
 
   "debug_settings.viafabricplus.queue_config_packets": "cola de configuración de paquetes",
   "debug_settings.viafabricplus.disable_sequencing": "Deshabilitar secuenciado",
@@ -74,7 +71,6 @@
   "visual_settings.viafabricplus.old_walking_animation": "Animación de caminar antigua",
   "visual_settings.viafabricplus.swing_hand_on_item_use": "Habilitar animación de golpe de bloque",
 
-  "bedrock.viafabricplus.login": "Tu navegador debería haberse abierto.\nCerrar esta pantalla cancelará el proceso!",
   "authentication.viafabricplus.failed_to_verify_session": "ViaFabricPlus falló al verificar tu sesión! Por favor inicia sesión en una cuenta o desactiva la autenticación de BetaCraft en la configuración de ViaFabricPlus",
 
   "report.viafabricplus.button": "Reportar problemas",

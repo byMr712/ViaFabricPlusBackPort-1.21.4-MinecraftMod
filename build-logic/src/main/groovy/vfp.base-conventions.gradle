@@ -59,10 +59,6 @@ dependencies {
         exclude group: "org.slf4j", module: "slf4j-api"
     }
     vvDependencies "net.raphimc:ViaLegacy:3.1.0"
-    vvDependencies("net.raphimc:ViaBedrock:0.0.24-20251205.235526-5") {
-        exclude group: "io.jsonwebtoken"
-        exclude group: "com.mojang", module: "brigadier"
-    }
 }
 
 java {

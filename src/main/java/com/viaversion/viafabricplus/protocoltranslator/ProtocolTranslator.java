@@ -38,7 +38,6 @@ import com.viaversion.viafabricplus.protocoltranslator.util.NoPacketSendChannel;
 import com.viaversion.vialoader.ViaLoader;
 import com.viaversion.vialoader.impl.platform.ViaAprilFoolsPlatformImpl;
 import com.viaversion.vialoader.impl.platform.ViaBackwardsPlatformImpl;
-import com.viaversion.vialoader.impl.platform.ViaBedrockPlatformImpl;
 import com.viaversion.viaversion.api.Via;
 import com.viaversion.viaversion.api.connection.ProtocolInfo;
 import com.viaversion.viaversion.api.connection.UserConnection;
@@ -50,19 +49,13 @@ import com.viaversion.viaversion.api.protocol.version.VersionType;
 import com.viaversion.viaversion.connection.UserConnectionImpl;
 import com.viaversion.viaversion.protocol.ProtocolPipelineImpl;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelOption;
 import io.netty.util.AttributeKey;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.lenni0451.reflect.stream.RStream;
-import net.lenni0451.reflect.stream.field.FieldWrapper;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.ClientConnection;
-import net.raphimc.viabedrock.api.BedrockProtocolVersion;
-import net.raphimc.viabedrock.protocol.data.ProtocolConstants;
-import org.cloudburstmc.netty.channel.raknet.config.RakChannelOption;
 
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -71,7 +64,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * This class represents the whole Protocol Translator, here all important variables are stored
@@ -138,16 +130,6 @@ public final class ProtocolTranslator {
         if (serverVersion != ProtocolTranslator.NATIVE_VERSION) {
             channel.attr(ProtocolTranslator.CLIENT_CONNECTION_ATTRIBUTE_KEY).set(connection);
             channel.attr(ProtocolTranslator.TARGET_VERSION_ATTRIBUTE_KEY).set(serverVersion);
-
-            if (serverVersion.equals(BedrockProtocolVersion.bedrockLatest)) {
-                channel.config().setOption(RakChannelOption.RAK_PROTOCOL_VERSION, ProtocolConstants.BEDROCK_RAKNET_PROTOCOL_VERSION);
-                channel.config().setOption(RakChannelOption.RAK_COMPATIBILITY_MODE, true);
-                channel.config().setOption(RakChannelOption.RAK_CLIENT_INTERNAL_ADDRESSES, 20);
-                channel.config().setOption(RakChannelOption.RAK_TIME_BETWEEN_SEND_CONNECTION_ATTEMPTS_MS, 500);
-                channel.config().setOption(RakChannelOption.RAK_CONNECT_TIMEOUT, channel.config().getOption(ChannelOption.CONNECT_TIMEOUT_MILLIS).longValue());
-                channel.config().setOption(RakChannelOption.RAK_SESSION_TIMEOUT, 30_000L);
-                channel.config().setOption(RakChannelOption.RAK_GUID, ThreadLocalRandom.current().nextLong());
-            }
 
             final UserConnection user = new UserConnectionImpl(channel, true);
             new ProtocolPipelineImpl(user);
@@ -265,17 +247,10 @@ public final class ProtocolTranslator {
         }
     }
 
-    private static void changeBedrockProtocolName() {
-        final ProtocolVersion bedrockLatest = RStream.of(BedrockProtocolVersion.class).fields().by("bedrockLatest").get();
-
-        final FieldWrapper name = RStream.of(bedrockLatest).withSuper().fields().by("name");
-        name.set(name.get() + " (Work in progress)");
-    }
-
     /**
      * This method is used to initialize the whole Protocol Translator
      *
-     * @param path The path where the ViaVersion config files are located
+     * @param path The path where the ViaVersion config files is located
      * @return A CompletableFuture that will be completed when the initialization is done
      */
     public static CompletableFuture<Void> init(final Path path) {
@@ -302,11 +277,9 @@ public final class ProtocolTranslator {
 
                     ViaBackwardsPlatformImpl::new,
                     ViaFabricPlusViaLegacyPlatformImpl::new,
-                    ViaAprilFoolsPlatformImpl::new,
-                    ViaBedrockPlatformImpl::new
+                    ViaAprilFoolsPlatformImpl::new
             );
             ProtocolVersion.register(AUTO_DETECT_PROTOCOL);
-            changeBedrockProtocolName();
             ViaFabricPlusProtocol.INSTANCE.initialize();
         });
     }

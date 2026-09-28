@@ -1,5 +1,4 @@
 {
-  "modmenu.descriptionTranslation.viafabricplus": "Fabric mod to connect to EVERY Minecraft server version (Release, Beta, Alpha, Classic, Snapshots, Bedrock) with QoL fixes to the gameplay",
 
   "base.viafabricplus.settings": "Ayarlar",
   "base.viafabricplus.on": "Açık",
@@ -33,7 +32,6 @@
   "setting_group_name.viafabricplus.visual": "Görünüm",
   "setting_group_name.viafabricplus.debug": "Debug",
   "setting_group_name.viafabricplus.general": "Genel",
-  "setting_group_name.viafabricplus.bedrock": "Bedrock",
 
   "screen.viafabricplus.force_version": "Zorunlu Sürüm",
   "screen.viafabricplus.report_issues": "Hata Bildir",
@@ -53,8 +51,6 @@
   "general_settings.viafabricplus.load_skins_and_skulls_in_legacy_versions": "Eski Versiyonlarda Kafaları ve Skinleri Yükle",
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "Alfa Sürümlerinde Envanter Eylemlerini Simüle Et",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "Hesabı Bedrock Edition Olarak Ayarlamak için Tıkla",
-  "bedrock_settings.viafabricplus.replace_default_port": "Sunucu Listesindeki Varsayılan Portu Değiştir",
 
   "debug_settings.viafabricplus.queue_config_packets": "Config Paketlerini Sıraya Koyun",
   "debug_settings.viafabricplus.disable_sequencing": "Sıralamayı Devredışı Bırak",
@@ -94,8 +90,6 @@
 
   "force_version.viafabricplus.title": "Lütfen sunucuya pinglenmesi/bağlanılması gereken sürümü seçin",
 
-  "click_to_set_bedrock_account.viafabricplus.notice": "Tarayıcınız açılmış olmalı.\nBu ekranı kapatmak işleminizi iptal eder!",
-  "click_to_set_bedrock_account.viafabricplus.display": "Bedrock hesabı: %s",
 
   "report.viafabricplus.button": "Hata Bildir",
   "report.viafabricplus.bug_report": "GitHub üzerinden bir hata bildir",
@@ -123,11 +117,6 @@
   "classic4j_library.viafabricplus.error.username": "Geçersiz kullanıcı adı.",
   "classic4j_library.viafabricplus.error.password": "Geçersiz şifre.",
   "classic4j_library.viafabricplus.error.verification": "Kullanıcı e-posta adresini henüz doğrulamadı.",
-  "classic4j_library.viafabricplus.error.logincode": "Çok faktörlü kimlik doğrulama talep edildi. Lütfen e-postanızı kontrol edin.",
+  "classic4j_library.viafabricplus.error.logincode": "Çok faktörlü kimlik doğrulama talep edildi. Lütfen e-postanızı kontrol edin."
 
-  "minecraftauth_library.viafabricplus.xbldevicetoken": "Xbox Live ile cihazın kimliği doğrulanıyor...",
-  "minecraftauth_library.viafabricplus.xblsisuauthentication": "SISU kullanarak Xbox Live ile kimlik doğrulanıyor...",
-  "minecraftauth_library.viafabricplus.mcchain": "Minecraft Hizmetleri ile Kimlik Doğrulanıyor...",
-  "minecraftauth_library.viafabricplus.xblxststoken": "XSTS Belirteci isteniyor...",
-  "minecraftauth_library.viafabricplus.playfabtoken": "PlayFab ile kimlik doğrulanıyor..."
 }

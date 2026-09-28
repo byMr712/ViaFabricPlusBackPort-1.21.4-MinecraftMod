@@ -36,7 +36,6 @@
   "authentication_settings.viafabricplus.automatically_select_cpe_when_using_classicube": "Forcer la version CPE si ClassiCube est utilisé",
   "authentication_settings.viafabricplus.set_session_name_to_classicube_name": "Fausser le nom d'utilisateur pour le nom ClassiCube si ClassiCube est utilisé",
   "authentication_settings.viafabricplus.load_skins_in_legacy_versions": "Permettre à ViaLegacy de charger les skins dans les versions héritées",
-  "authentication_settings.viafabricplus.bedrock": "Cliquer pour définir un compte pour l'édition Bedrock",
 
   "visual_settings.viafabricplus.disable_secure_chat_warning": "Désactiver l'avertissement de chat sécurisé",
   "visual_settings.viafabricplus.hide_signature_indicator": "Masquer l'indicateur de signature",
@@ -50,8 +49,6 @@
   "visual_settings.viafabricplus.old_walking_animation": "Ancienne animation de marche",
   "visual_settings.viafabricplus.sodium": "Corriger le rendu de chunk de Sodium",
 
-  "bedrock.viafabricplus.login": "Votre navigateur devrait s'être ouvert. Veuillez entrer le code suivant: %s. Fermer cette fenêtre annulera le processus!",
-  "bedrocklogin.viafabricplus.error": "Une erreur s'est produite ! Veuillez consulter latest.log pour plus d'informations. Veuillez signaler le bogue à l'adresse : \nhttps://github.com/ViaVersion/ViaFabricPlus/issues",
 
   "base.viafabricplus.force_version_title": "Veuillez sélectionner la version avec laquelle le serveur doit être pingé/connecté",
 

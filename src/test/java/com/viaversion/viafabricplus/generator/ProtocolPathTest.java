@@ -6,7 +6,6 @@ import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
 import com.viaversion.vialoader.ViaLoader;
 import com.viaversion.vialoader.impl.platform.ViaBackwardsPlatformImpl;
 import com.viaversion.vialoader.impl.platform.ViaAprilFoolsPlatformImpl;
-import com.viaversion.vialoader.impl.platform.ViaBedrockPlatformImpl;
 import com.viaversion.viafabricplus.protocoltranslator.impl.platform.ViaFabricPlusViaLegacyPlatformImpl;
 import com.viaversion.viafabricplus.protocoltranslator.impl.platform.ViaFabricPlusViaVersionPlatformImpl;
 import com.viaversion.viafabricplus.protocoltranslator.ProtocolTranslator;
@@ -30,8 +29,7 @@ public class ProtocolPathTest {
                 new ViaFabricPlusVLCommandHandler(),
                 ViaBackwardsPlatformImpl::new,
                 ViaFabricPlusViaLegacyPlatformImpl::new,
-                ViaAprilFoolsPlatformImpl::new,
-                ViaBedrockPlatformImpl::new
+                ViaAprilFoolsPlatformImpl::new
         );
 
         ProtocolVersion clientVersion = ProtocolVersion.v1_21_4;

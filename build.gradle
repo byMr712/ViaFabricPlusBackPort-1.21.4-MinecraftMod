@@ -3,7 +3,7 @@ plugins {
 }
 
 base {
-    description = "Fabric mod to connect to EVERY Minecraft server version (Release, Beta, Alpha, Classic, Snapshots, Bedrock) with QoL fixes to the gameplay"
+    description = "Fabric mod to connect to EVERY Minecraft server version (Release, Beta, Alpha, Classic, Snapshots) with QoL fixes to the gameplay"
     archivesName = "ViaFabricPlusBackPort"
 }
 
@@ -46,14 +46,7 @@ dependencies {
     include project(":viafabricplus-visuals")
 
     // Dependencies exclusively to the root mod
-    jij("net.raphimc:MinecraftAuth:4.1.1") {
-        exclude group: "com.google.code.gson", module: "gson"
-        exclude group: "org.slf4j", module: "slf4j-api"
-    }
     jij "net.lenni0451:Reflect:1.4.0"
-    jij("org.cloudburstmc.netty:netty-transport-raknet:1.0.0.CR3-SNAPSHOT") {
-        exclude group: "io.netty"
-    }
     jij "de.florianmichael:Classic4J:2.1.1-SNAPSHOT"
 
     // Only to compile against for the ModMenu integration

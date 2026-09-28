@@ -1,5 +1,4 @@
 {
-  "modmenu.descriptionTranslation.viafabricplus": "マルチプレイ時にQoL修正(バグ修正や動作改善)を加え、すべてのMinecraftサーバーバージョン（リリース、ベータ、アルファ、クラシック、スナップショット、Bedrock）に接続するためのFabric MOD",
 	
   "base.viafabricplus.settings": "設定",
   "base.viafabricplus.on": "オン",
@@ -36,7 +35,6 @@
   "setting_group_name.viafabricplus.visual": "視覚",
   "setting_group_name.viafabricplus.debug": "実験的",
   "setting_group_name.viafabricplus.general": "全般",
-  "setting_group_name.viafabricplus.bedrock": "統合版",
 
   "screen.viafabricplus.force_version": "強制的なバージョン",
   "screen.viafabricplus.report_issues": "問題を報告",
@@ -44,7 +42,6 @@
   "screen.viafabricplus.classicube_login": "Classicube ログイン",
   "screen.viafabricplus.classicube_mfa": "Classicube 多段階認証",
   "screen.viafabricplus.settings": "設定",
-  "screen.viafabricplus.bedrock_realms": "統合版Realms",
   "screen.viafabricplus.accept_invite": "招待コードを承認",
 
   "general_settings.viafabricplus.save_selected_protocol_version": "選択したプロトコルバージョンを保存",
@@ -60,8 +57,6 @@
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "アルファバージョンでインベントリアクションをエミュレート",
   "general_settings.viafabricplus.save_scroll_position_in_slot_screens": "スロット画面でスクロール位置を保存",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "クリックして統合版のアカウントを設定",
-  "bedrock_settings.viafabricplus.replace_default_port": "サーバーリストでデフォルトのポートを置換",
 
   "debug_settings.viafabricplus.queue_config_packets": "キュー設定パケット",
   "debug_settings.viafabricplus.disable_sequencing": "優先順位付けを無効化",
@@ -110,8 +105,6 @@
 
   "force_version.viafabricplus.title": "サーバーに接続するバージョンを選択してください",
 
-  "click_to_set_bedrock_account.viafabricplus.notice": "ブラウザを開きました!\nこの画面を閉じると、処理がキャンセルされます！",
-  "click_to_set_bedrock_account.viafabricplus.display": "統合版のアカウント: %s",
   
   "change_game_menu_screen_layout.viafabricplus.authentic": "真正",
   "change_game_menu_screen_layout.viafabricplus.adjusted": "調整",
@@ -146,23 +139,7 @@
   "classic4j_library.viafabricplus.error.username": "無効なユーザー名",
   "classic4j_library.viafabricplus.error.password": "無効なパスワード",
   "classic4j_library.viafabricplus.error.verification": "ユーザーはまだメールアドレスを確認していません",
-  "classic4j_library.viafabricplus.error.logincode": "多要素認証が要求されました。メールを確認してください",
+  "classic4j_library.viafabricplus.error.logincode": "多要素認証が要求されました。メールを確認してください"
 
-  "minecraftauth_library.viafabricplus.xbldevicetoken": "Xbox Liveでデバイスを認証中...",
-  "minecraftauth_library.viafabricplus.xblsisuauthentication": "SISUを使用してXbox Liveで認証中...",
-  "minecraftauth_library.viafabricplus.mcchain": "Minecraft サービスで認証中...",
-  "minecraftauth_library.viafabricplus.xblxststoken": "XSTSトークンを要求中...",
-  "minecraftauth_library.viafabricplus.playfabtoken": "PlayFabで認証中...",
-  "minecraftauth_library.viafabricplus.realmsxsts": "Realms XSTSトークンを要求中...",
   
-  "bedrock_realms.viafabricplus.warning": "この機能を使用するには、設定で統合版アカウントを設定する必要があります",
-  "bedrock_realms.viafabricplus.availability_check": "利用状況を確認しています...",
-  "bedrock_realms.viafabricplus.no_worlds": "ワールドが見つかりませんでした :(",
-  "bedrock_realms.viafabricplus.unavailable": "お使いのViaFabricPlusは古く、Realmsと互換性がありません",
-  "bedrock_realms.viafabricplus.error": "エラーが発生しました。詳細についてはログを参照してください",
-  "bedrock_realms.viafabricplus.join": "realmに参加",
-  "bedrock_realms.viafabricplus.leave": "realmから退出",
-  "bedrock_realms.viafabricplus.invite": "招待コードを承認",
-  "bedrock_realms.viafabricplus.expired": "Realmの有効期限が切れました",
-  "bedrock_realms.viafabricplus.incompatible": "Realmsのバージョンが古い、または新しすぎる可能性があります"
 }

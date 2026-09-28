@@ -35,7 +35,6 @@
   "authentication_settings.viafabricplus.automatically_select_cpe_when_using_classicube": "Změnit verzi na CPE při používání ClassiCube",
   "authentication_settings.viafabricplus.set_session_name_to_classicube_name": "Změnit uživatelské jméno na ClassiCube jméno při používání ClassiCube",
   "authentication_settings.viafabricplus.load_skins_in_legacy_versions": "Umožnit ViaLegacy k načtení skinů ve starých verzích",
-  "authentication_settings.viafabricplus.bedrock": "Kliknutím zvolíš účet pro Bedrock edici",
 
   "visual_settings.viafabricplus.disable_secure_chat_warning": "Vypnout varování \"zabezpečeného\" chatu",
   "visual_settings.viafabricplus.hide_signature_indicator": "Nezobrazovat indikátory \"zabezpečeného\" chatu",
@@ -49,8 +48,6 @@
   "visual_settings.viafabricplus.old_walking_animation": "Stará chodící animace",
   "visual_settings.viafabricplus.sodium": "Opravit renderer chunků v Sodium módu",
 
-  "bedrock.viafabricplus.login": "Váš webový prohlížeč by se měl spustit.\nProsím zadejte tento Kód: %s\nZavření této obrazovky zruší tento proces!",
-  "bedrocklogin.viafabricplus.error": "Nastala chyba. Podívejte se do souboru latest.log pro více informací,\nprosím nahlašte tuto chybu zde (nejlépe v angličtině): \nhttps://github.com/ViaVersion/ViaFabricPlus/issues",
 
   "base.viafabricplus.force_version_title": "Prosím zvolte verzi s kterou se bude server pingovat/připojovat",
 

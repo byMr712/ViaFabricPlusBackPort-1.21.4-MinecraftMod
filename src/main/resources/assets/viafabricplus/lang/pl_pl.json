@@ -1,5 +1,4 @@
 {
-  "modmenu.descriptionTranslation.viafabricplus": "Mod pozwalający na łączenie się do serwerów minecraft na KAŻDEJ wersji gry (Release, Snapshoty (wliczając wydania prima aprilis), Beta, Alpha, Classic oraz Bedrock) z drobnymi ulepszeniami rozgrywki.",
 
   "base.viafabricplus.settings": "Ustawienia",
   "base.viafabricplus.on": "Wł.",
@@ -36,7 +35,6 @@
   "setting_group_name.viafabricplus.visual": "Wizualne",
   "setting_group_name.viafabricplus.debug": "Debugowanie",
   "setting_group_name.viafabricplus.general": "Ogólne",
-  "setting_group_name.viafabricplus.bedrock": "Bedrock",
 
   "screen.viafabricplus.force_version": "Wymuś wersję",
   "screen.viafabricplus.report_issues": "Zgłaszaj problemy",
@@ -44,7 +42,6 @@
   "screen.viafabricplus.classicube_login": "Logowanie Classicube",
   "screen.viafabricplus.classicube_mfa": "Classicube MFA",
   "screen.viafabricplus.settings": "Ustawienia",
-  "screen.viafabricplus.bedrock_realms": "Bedrock Realms",
   "screen.viafabricplus.accept_invite": "Zaakceptuj zaproszenie",
 
   "general_settings.viafabricplus.save_selected_protocol_version": "Zapisz wybraną wersję protokołu",
@@ -60,8 +57,6 @@
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "Emuluj akcje ekwipunku w wersjach alpha",
   "general_settings.viafabricplus.save_scroll_position_in_slot_screens": "Zapisuj pozycję scrolla w ekranach ze slotami",
 
-  "bedrock_settings.viafabricplus.click_to_set_bedrock_account": "Naciśnij, aby ustawić konto dla minecraft bedrock edition",
-  "bedrock_settings.viafabricplus.replace_default_port": "Zamień domyślny port w liście serwerów",
 
   "debug_settings.viafabricplus.queue_config_packets": "Ustawiaj pakiety konfiguracji w kolejce",
   "debug_settings.viafabricplus.disable_sequencing": "Wyłącz sekwencjonowanie",
@@ -110,8 +105,6 @@
 
   "force_version.viafabricplus.title": "Wybierz wersję na której chcesz łączyć się do serwera",
 
-  "click_to_set_bedrock_account.viafabricplus.notice": "Twoja przeglądarka powinna się otworzyć.\nZamyknięcie tego ekranu będzie anulowało proces!",
-  "click_to_set_bedrock_account.viafabricplus.display": "Konto na bedrocku: %s",
 
   "change_game_menu_screen_layout.viafabricplus.authentic": "Autentyczne",
   "change_game_menu_screen_layout.viafabricplus.adjusted": "Dostosowane",
@@ -146,23 +139,7 @@
   "classic4j_library.viafabricplus.error.username": "Niepoprawna nazwa użytkownika.",
   "classic4j_library.viafabricplus.error.password": "Niepoprawne hasło.",
   "classic4j_library.viafabricplus.error.verification": "Niezweryfikowany adres e-mail.",
-  "classic4j_library.viafabricplus.error.logincode": "Wymagane jest uwierzytelnianie wieloskładnikowe. Sprawdź swój e-mail.",
+  "classic4j_library.viafabricplus.error.logincode": "Wymagane jest uwierzytelnianie wieloskładnikowe. Sprawdź swój e-mail."
 
-  "minecraftauth_library.viafabricplus.xbldevicetoken": "Uwierzytelnianie urządzenia z Xbox Live...",
-  "minecraftauth_library.viafabricplus.xblsisuauthentication": "Uwierzytelnianie z Xbox Live używając SISU...",
-  "minecraftauth_library.viafabricplus.mcchain": "Uwierzytelnianie z Minecraft Services...",
-  "minecraftauth_library.viafabricplus.xblxststoken": "Zapytanie o token XSTS...",
-  "minecraftauth_library.viafabricplus.playfabtoken": "Uwierzytelnianie z PlayFab...",
-  "minecraftauth_library.viafabricplus.realmsxsts": "Pytanie o token XSTS Realms...",
 
-  "bedrock_realms.viafabricplus.warning": "Ta funkcja wymaga ustawienia konta bedrock edition w ustawieniach!",
-  "bedrock_realms.viafabricplus.availability_check": "Sprawdzanie dostępności...",
-  "bedrock_realms.viafabricplus.no_worlds": "Nie znaleziono światów :(",
-  "bedrock_realms.viafabricplus.unavailable": "Twoje ViaFabricPlus jest przestarzałe i niekompatybilne z minecraft realms.",
-  "bedrock_realms.viafabricplus.error": "Nastąpił błąd, sprawdź logi po więcej informacji",
-  "bedrock_realms.viafabricplus.join": "Dołącz do realma",
-  "bedrock_realms.viafabricplus.leave": "Opuść realm",
-  "bedrock_realms.viafabricplus.invite": "Zaakceptuj kod zaproszenia",
-  "bedrock_realms.viafabricplus.expired": "Realm jest przeterminowany",
-  "bedrock_realms.viafabricplus.incompatible": "Wersja minecraft realms jest zbyt stara albo zbyt nowa"
 }
