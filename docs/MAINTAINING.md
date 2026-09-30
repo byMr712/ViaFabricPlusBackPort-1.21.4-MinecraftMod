@@ -45,6 +45,14 @@ something, ask in the ViaVersion discord.
    **Read more about which fixes should be
    added [HERE](../CONTRIBUTING.md#adding-protocol-new-fixes---which-are-important-and-which-arent)**
 
+   - **Important for this fork:** not every upstream fix is portable. Upstream targets the latest
+     client, this fork targets 1.21.4, so most upstream fixes are "emulate the ≤ 26.2 client on a
+     26.3 client" changes. The 1.21.4 client *is* the old client, so such mixins would be dead
+     code, and their targets (`BlockTransformer`, `EntityFluidInteraction`, `LevelEvent`,
+     `ShelfBlock`, `MultiPlayerGameMode.stopDestroyBlock`, `MinecraftClient.pauseGame`, ...) do
+     not exist in 1.21.4 at all. Always verify against the 1.21.4 bytecode before porting.
+     See [UPSTREAM_5.1.2_AUDIT.md](UPSTREAM_5.1.2_AUDIT.md) for a worked example.
+
     - From experience, the following packages contain the usual important changes (mojang mappings):
         - `net.minecraft`
         - `net.minecraft.client`
