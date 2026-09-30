@@ -88,6 +88,7 @@ public abstract class MixinConnectScreen_1 {
             }
         }
         ProtocolTranslator.setTargetVersion(targetVersion, true);
+        ((com.viaversion.viafabricplus.injection.access.base.IClientConnection) connection).viaFabricPlus$setTargetVersion(targetVersion);
 
         this.viaFabricPlus$useClassiCubeAccount = AuthenticationSettings.INSTANCE.setSessionNameToClassiCubeNameInServerList.getValue() && ViaFabricPlusClassicMPPassProvider.classicubeMPPass != null;
 
