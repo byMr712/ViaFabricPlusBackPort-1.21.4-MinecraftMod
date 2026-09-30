@@ -76,7 +76,16 @@ public abstract class MixinConnectScreen_1 {
         }
         if (targetVersion == ProtocolTranslator.AUTO_DETECT_PROTOCOL) {
             this.field_2416.setStatus(Text.translatable("base.viafabricplus.detecting_server_version"));
-            targetVersion = ProtocolVersionDetector.get(field_33737, address, ProtocolTranslator.NATIVE_VERSION);
+            try {
+                targetVersion = ProtocolVersionDetector.get(field_33737, address, ProtocolTranslator.NATIVE_VERSION);
+            } catch (Throwable t) {
+                com.viaversion.viafabricplus.ViaFabricPlusImpl.INSTANCE.logger().warn("Failed to auto-detect server version for {}: {}", field_33737, t.getMessage());
+                if (this.field_40415 != null && this.field_40415.protocolVersion > 0 && ProtocolVersion.isRegistered(this.field_40415.protocolVersion)) {
+                    targetVersion = ProtocolVersion.getProtocol(this.field_40415.protocolVersion);
+                } else {
+                    targetVersion = ProtocolTranslator.NATIVE_VERSION;
+                }
+            }
         }
         ProtocolTranslator.setTargetVersion(targetVersion, true);
 

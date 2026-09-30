@@ -51,82 +51,84 @@ public final class ProtocolVersionDetector {
      * @return The protocol version of the server
      */
     public static ProtocolVersion get(final ServerAddress serverAddress, final InetSocketAddress socketAddress, final ProtocolVersion clientVersion) throws Exception {
-        try (
-            final Socket socket = new Socket(serverAddress.getAddress(), serverAddress.getPort());
-
-            final DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            final DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-
-            final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            final DataOutputStream handshakePacket = new DataOutputStream(byteArrayOutputStream)
-        ) {
+        try (final Socket socket = new Socket()) {
             socket.setTcpNoDelay(true);
             socket.setSoTimeout(TIMEOUT);
+            socket.connect(socketAddress != null ? socketAddress : new InetSocketAddress(serverAddress.getAddress(), serverAddress.getPort()), TIMEOUT);
 
-            // Write handshake packet
-            handshakePacket.writeByte(0); // Packet ID
+            try (
+                final DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                final DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 
-            writeVarInt(handshakePacket, clientVersion.getOriginalVersion());
-            if (clientVersion.olderThanOrEqualTo(ProtocolVersion.v1_17)) {
+                final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                final DataOutputStream handshakePacket = new DataOutputStream(byteArrayOutputStream)
+            ) {
+                // Write handshake packet
+                handshakePacket.writeByte(0); // Packet ID
+
+                writeVarInt(handshakePacket, clientVersion.getOriginalVersion());
                 writeVarString(handshakePacket, serverAddress.getAddress());
-                handshakePacket.writeShort(serverAddress.getPort());
-            } else {
-                writeVarString(handshakePacket, socketAddress.getHostString());
-                handshakePacket.writeShort(socketAddress.getPort());
-            }
-            writeVarInt(handshakePacket, ConnectionIntent.STATUS.getId());
+                handshakePacket.writeShort(socketAddress != null ? socketAddress.getPort() : serverAddress.getPort());
+                writeVarInt(handshakePacket, ConnectionIntent.STATUS.getId());
 
-            writeVarInt(dataOutputStream, byteArrayOutputStream.size());
-            dataOutputStream.write(byteArrayOutputStream.toByteArray());
+                writeVarInt(dataOutputStream, byteArrayOutputStream.size());
+                dataOutputStream.write(byteArrayOutputStream.toByteArray());
 
-            // Write ping request packet
-            dataOutputStream.writeByte(1);
-            dataOutputStream.writeByte(0);
+                // Write ping request packet
+                dataOutputStream.writeByte(1);
+                dataOutputStream.writeByte(0);
+                dataOutputStream.flush();
 
-            // Receive ping response packet
-            final int size = readVarInt(dataInputStream);
-            if (size <= 0) {
-                throw new IllegalStateException("Invalid packet size");
-            }
-            final int id = readVarInt(dataInputStream);
-            if (id != 0) {
-                throw new IllegalStateException("Invalid packet ID");
-            }
+                // Receive ping response packet
+                final int size = readVarInt(dataInputStream);
+                if (size <= 0) {
+                    throw new IllegalStateException("Invalid packet size");
+                }
+                final int id = readVarInt(dataInputStream);
+                if (id != 0) {
+                    throw new IllegalStateException("Invalid packet ID");
+                }
 
-            final String response = readVarString(dataInputStream);
-            final JsonObject object = GSON.fromJson(response, JsonObject.class);
-            if (!object.has("version")) {
-                throw new IllegalStateException("Invalid ping response");
-            }
+                final String response = readVarString(dataInputStream);
+                final JsonObject object = GSON.fromJson(response, JsonObject.class);
+                if (object == null || !object.has("version")) {
+                    throw new IllegalStateException("Invalid ping response");
+                }
 
-            final JsonObject version = object.getAsJsonObject("version");
-            if (!version.has("name") || !version.has("protocol")) {
-                throw new IllegalStateException("Invalid ping response");
-            }
+                final JsonObject version = object.getAsJsonObject("version");
+                if (version == null) {
+                    throw new IllegalStateException("Invalid ping response");
+                }
 
-            final int serverVersion = version.get("protocol").getAsInt();
+                if (version.has("protocol")) {
+                    final int serverVersion = version.get("protocol").getAsInt();
 
-            // If the server is on the same version as the client, we can just connect
-            if (clientVersion.getOriginalVersion() == serverVersion) {
-                return clientVersion;
-            }
+                    // If the server is on the same version as the client, we can just connect
+                    if (clientVersion.getOriginalVersion() == serverVersion) {
+                        return clientVersion;
+                    }
 
-            // If the protocol is registered, we can use it
-            if (ProtocolVersion.isRegistered(serverVersion)) {
-                return ProtocolVersion.getProtocol(serverVersion);
-            }
-
-            // Fallback with the name
-            final String name = version.get("name").getAsString();
-            for (final ProtocolVersion protocol : ProtocolVersionList.getProtocolsNewToOld()) {
-                for (final String includedVersion : protocol.getIncludedVersions()) {
-                    if (name.contains(includedVersion)) {
-                        return protocol;
+                    // If the protocol is registered, we can use it
+                    if (ProtocolVersion.isRegistered(serverVersion)) {
+                        return ProtocolVersion.getProtocol(serverVersion);
                     }
                 }
-            }
 
-            throw new RuntimeException("Unable to detect the server version\nServer sent an invalid protocol id: " + serverAddress + " (" + name + Formatting.RESET + ")");
+                // Fallback with the name
+                if (version.has("name")) {
+                    final String name = version.get("name").getAsString();
+                    for (final ProtocolVersion protocol : ProtocolVersionList.getProtocolsNewToOld()) {
+                        for (final String includedVersion : protocol.getIncludedVersions()) {
+                            if (name.contains(includedVersion)) {
+                                return protocol;
+                            }
+                        }
+                    }
+                    throw new RuntimeException("Unable to detect the server version\nServer sent an invalid protocol id: " + serverAddress + " (" + name + Formatting.RESET + ")");
+                }
+
+                throw new RuntimeException("Unable to detect the server version\nServer sent an invalid protocol response: " + serverAddress);
+            }
         }
     }
 
