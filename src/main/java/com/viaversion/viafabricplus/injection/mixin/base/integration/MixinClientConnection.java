@@ -61,8 +61,7 @@ public abstract class MixinClientConnection {
         }
         final String cleanMsg = Formatting.strip(msg);
         final Text friendlyText = Text.empty()
-                .append(Text.literal("Автоопределение версии не удалось или произошла сетевая ошибка\n").formatted(Formatting.RED, Formatting.BOLD))
-                .append(Text.literal("Попробуйте указать версию вручную в названии сервера (например '26.2') или через меню ViaFabricPlus в списке серверов.\n\n").formatted(Formatting.YELLOW))
+                .append(Text.literal("Ошибка сетевого соединения / пакета\n\n").formatted(Formatting.RED, Formatting.BOLD))
                 .append(Text.literal("Детали: " + cleanMsg).formatted(Formatting.GRAY));
         original.call(instance, new DisconnectionInfo(friendlyText, info.report(), info.bugReportLink()));
     }
