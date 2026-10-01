@@ -82,8 +82,11 @@ public abstract class MixinServerInfo implements IServerInfo {
         if (this.name != null && !this.name.isEmpty()) {
             for (final ProtocolVersion protocol : ProtocolVersionList.getProtocolsNewToOld()) {
                 for (final String includedVersion : protocol.getIncludedVersions()) {
-                    if (this.name.contains(includedVersion)) {
-                        return protocol;
+                    if (includedVersion != null && includedVersion.contains(".")) {
+                        final String regex = "(?i)(^|[^a-zA-Z0-9.])" + java.util.regex.Pattern.quote(includedVersion) + "($|[^a-zA-Z0-9.])";
+                        if (java.util.regex.Pattern.compile(regex).matcher(this.name).find()) {
+                            return protocol;
+                        }
                     }
                 }
             }

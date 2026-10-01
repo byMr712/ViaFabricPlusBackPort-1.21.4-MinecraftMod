@@ -111,7 +111,7 @@ public final class ProtocolTranslator {
     /**
      * This field stores the target version that you set in the GUI
      */
-    private static ProtocolVersion targetVersion = AUTO_DETECT_PROTOCOL;
+    private static ProtocolVersion targetVersion = NATIVE_VERSION;
 
     /**
      * This field stores the previous selected version if {@link #setTargetVersion(ProtocolVersion, boolean)} is called with revertOnDisconnect set to true
@@ -164,6 +164,13 @@ public final class ProtocolTranslator {
         if (oldVersion != newVersion) {
             if (revertOnDisconnect) {
                 previousVersion = oldVersion;
+            } else {
+                try {
+                    if (com.viaversion.viafabricplus.save.SaveManager.INSTANCE.getSettingsSave() != null) {
+                        com.viaversion.viafabricplus.save.SaveManager.INSTANCE.getSettingsSave().save();
+                    }
+                } catch (final Throwable ignored) {
+                }
             }
             Events.CHANGE_PROTOCOL_VERSION.invoker().onChangeProtocolVersion(oldVersion, targetVersion);
         }

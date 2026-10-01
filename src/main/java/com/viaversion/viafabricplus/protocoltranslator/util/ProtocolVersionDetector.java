@@ -119,8 +119,11 @@ public final class ProtocolVersionDetector {
                     final String name = version.get("name").getAsString();
                     for (final ProtocolVersion protocol : ProtocolVersionList.getProtocolsNewToOld()) {
                         for (final String includedVersion : protocol.getIncludedVersions()) {
-                            if (name.contains(includedVersion)) {
-                                return protocol;
+                            if (includedVersion != null && includedVersion.contains(".")) {
+                                final String regex = "(?i)(^|[^a-zA-Z0-9.])" + java.util.regex.Pattern.quote(includedVersion) + "($|[^a-zA-Z0-9.])";
+                                if (java.util.regex.Pattern.compile(regex).matcher(name).find()) {
+                                    return protocol;
+                                }
                             }
                         }
                     }

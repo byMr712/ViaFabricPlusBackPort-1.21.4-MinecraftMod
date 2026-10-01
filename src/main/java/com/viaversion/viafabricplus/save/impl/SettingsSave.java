@@ -78,19 +78,23 @@ public final class SettingsSave extends AbstractSave {
     @Override
     public void postInit() {
         if (selectedProtocolVersion == null) {
-            ProtocolTranslator.setTargetVersion(ProtocolTranslator.AUTO_DETECT_PROTOCOL);
+            ProtocolTranslator.setTargetVersion(ProtocolTranslator.NATIVE_VERSION);
             return;
         }
         // Set target version AFTER protocol loading, so we can reach all versions
         if (GeneralSettings.INSTANCE.saveSelectedProtocolVersion.getValue()) {
-            final ProtocolVersion protocolVersion = protocolVersionByName(selectedProtocolVersion);
-            if (protocolVersion != null) {
-                ProtocolTranslator.setTargetVersion(protocolVersion);
-            } else {
+            if (ProtocolTranslator.AUTO_DETECT_PROTOCOL.getName().equals(selectedProtocolVersion)) {
                 ProtocolTranslator.setTargetVersion(ProtocolTranslator.AUTO_DETECT_PROTOCOL);
+            } else {
+                final ProtocolVersion protocolVersion = protocolVersionByName(selectedProtocolVersion);
+                if (protocolVersion != null) {
+                    ProtocolTranslator.setTargetVersion(protocolVersion);
+                } else {
+                    ProtocolTranslator.setTargetVersion(ProtocolTranslator.NATIVE_VERSION);
+                }
             }
         } else {
-            ProtocolTranslator.setTargetVersion(ProtocolTranslator.AUTO_DETECT_PROTOCOL);
+            ProtocolTranslator.setTargetVersion(ProtocolTranslator.NATIVE_VERSION);
         }
     }
 
