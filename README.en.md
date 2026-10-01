@@ -17,12 +17,11 @@ A specialized build and backport of ViaFabricPlus for **Minecraft 1.21.4 (Fabric
 All rights belong to the original upstream authors — [ViaVersion](https://github.com/ViaVersion) / [FlorianMichael](https://github.com/FlorianMichael) / [RaphiMC](https://github.com/RaphiMC).  
 Original repository: [ViaVersion/ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus).  
 
-- **Stable 1.21.4 Client:** Unlike upstream ViaFabricPlus which only supports the latest Minecraft release, this fork preserves your stable 1.21.4 client and mod environment while extending protocol compatibility up to **26.3** servers.
-- **Smart Version Auto-Detection:** Automatically determines the server's real version upon connection with fast ping timeouts and full SRV record resolution. The mod also supports determining the server version from its name in the server list (e.g. "26.3"), which will be used when connecting in case auto-detection does not work.
-- **Updated Protocol Libraries:** Bundles up-to-date protocol translation libraries (**ViaVersion**, **ViaBackwards**, **ViaRewind**) for seamless multiplayer connections across all eras of Java Edition.
-- **Authentic Mechanics:** Preserves all QoL fixes and legacy physics emulation (Legacy Combat, Movement, hitboxes, and collision fixes).
-- **Built-in Compatibility Modules:** Includes pre-packaged `compat` patches for popular mods (Tide, Lithium, Inventory Profiles Next, Fabric API, etc.).
-- **Convenient Build Scripts:** Includes `build.bat` for quick compiling.
+- **1.21.4 Client Backport:** Allows staying on the 1.21.4 client with your full mod setup while expanding protocol compatibility up to **26.3 / 1.21.11** servers.
+- **Smart Version Auto-Detection:** Fast non-blocking server polling with timeout and SRV record support. Added target version parsing from the server name (e.g. `[26.3]` or `26.2`) when ping-based auto-detection is unavailable.
+- **Netty Pipeline Stability:** Fixed crashes and disconnects when switching between proxy servers (BungeeCord, Velocity, 6b6t) and traversing portals (`EncoderTransitioner`/`DecoderTransitioner`), added safe handling of desynced command trees (`CommandTreeS2CPacket`) and leftover packet bytes.
+- **Informative Error Screens:** Clear and readable disconnect and packet decode error messages.
+- **Cleanup & Build Scripts:** Removed unused `ViaBedrock` module, added `build.bat` quick build script.
 
 ---
 
