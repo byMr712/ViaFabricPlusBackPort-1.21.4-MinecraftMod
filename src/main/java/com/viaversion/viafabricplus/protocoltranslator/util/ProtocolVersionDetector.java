@@ -142,10 +142,10 @@ public final class ProtocolVersionDetector {
 
                 if (version.has("name")) {
                     final String name = version.get("name").getAsString();
-                    throw new RuntimeException("Unable to detect the server version\nServer sent an invalid protocol id: " + serverAddress + " (" + name + Formatting.RESET + ")");
+                    throw new RuntimeException("Автоопределение версии не удалось, попробуйте указать её вручную в названии сервера или меню ViaFabricPlus в меню серверов\n(Сервер: " + serverAddress + " | " + name + Formatting.RESET + ")");
                 }
 
-                throw new RuntimeException("Unable to detect the server version\nServer sent an invalid protocol response: " + serverAddress);
+                throw new RuntimeException("Автоопределение версии не удалось, попробуйте указать её вручную в названии сервера или меню ViaFabricPlus в меню серверов");
             }
         }
     }
