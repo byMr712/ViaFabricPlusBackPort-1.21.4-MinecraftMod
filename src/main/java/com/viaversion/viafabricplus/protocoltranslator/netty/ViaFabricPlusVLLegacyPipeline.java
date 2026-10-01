@@ -45,6 +45,12 @@ public final class ViaFabricPlusVLLegacyPipeline extends VLLegacyPipeline {
 
         ctx.pipeline().addAfter(VIA_DECODER_NAME, VIA_FLOW_CONTROL, new NoReadFlowControlHandler());
 
+        final ChannelHandler encoder = ctx.pipeline().get(VIA_ENCODER_NAME);
+        if (encoder != null && ctx.pipeline().get(packetEncoderName()) != null) {
+            ctx.pipeline().remove(encoder);
+            ctx.pipeline().addAfter(packetEncoderName(), VIA_ENCODER_NAME, encoder);
+        }
+
         this.connection.getProtocolInfo().getPipeline().add(ViaFabricPlusProtocol.INSTANCE);
     }
 
