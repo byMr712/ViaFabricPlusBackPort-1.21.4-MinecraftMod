@@ -70,7 +70,7 @@ public abstract class MixinConnectScreen_1 {
         final IServerInfo mixinServerInfo = (IServerInfo) this.field_40415;
 
         ProtocolVersion targetVersion = ProtocolTranslator.getTargetVersion();
-        if (mixinServerInfo.viaFabricPlus$forcedVersion() != null && !mixinServerInfo.viaFabricPlus$passedDirectConnectScreen()) {
+        if (mixinServerInfo != null && mixinServerInfo.viaFabricPlus$forcedVersion() != null && !mixinServerInfo.viaFabricPlus$passedDirectConnectScreen()) {
             targetVersion = mixinServerInfo.viaFabricPlus$forcedVersion();
             mixinServerInfo.viaFabricPlus$passDirectConnectScreen(false); // reset state
         }

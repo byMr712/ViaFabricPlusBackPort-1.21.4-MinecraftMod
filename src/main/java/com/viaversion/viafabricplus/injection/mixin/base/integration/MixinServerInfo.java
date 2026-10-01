@@ -35,6 +35,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.viaversion.vialoader.util.ProtocolVersionList;
+
 @Mixin(ServerInfo.class)
 public abstract class MixinServerInfo implements IServerInfo {
 
@@ -74,7 +76,19 @@ public abstract class MixinServerInfo implements IServerInfo {
 
     @Override
     public ProtocolVersion viaFabricPlus$forcedVersion() {
-        return viaFabricPlus$forcedVersion;
+        if (viaFabricPlus$forcedVersion != null) {
+            return viaFabricPlus$forcedVersion;
+        }
+        if (this.name != null && !this.name.isEmpty()) {
+            for (final ProtocolVersion protocol : ProtocolVersionList.getProtocolsNewToOld()) {
+                for (final String includedVersion : protocol.getIncludedVersions()) {
+                    if (this.name.contains(includedVersion)) {
+                        return protocol;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     @Override
