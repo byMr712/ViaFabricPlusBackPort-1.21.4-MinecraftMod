@@ -78,6 +78,7 @@ public final class SettingsSave extends AbstractSave {
     @Override
     public void postInit() {
         if (selectedProtocolVersion == null) {
+            ProtocolTranslator.setTargetVersion(ProtocolTranslator.AUTO_DETECT_PROTOCOL);
             return;
         }
         // Set target version AFTER protocol loading, so we can reach all versions
@@ -85,9 +86,11 @@ public final class SettingsSave extends AbstractSave {
             final ProtocolVersion protocolVersion = protocolVersionByName(selectedProtocolVersion);
             if (protocolVersion != null) {
                 ProtocolTranslator.setTargetVersion(protocolVersion);
+            } else {
+                ProtocolTranslator.setTargetVersion(ProtocolTranslator.AUTO_DETECT_PROTOCOL);
             }
         } else {
-            ProtocolTranslator.setTargetVersion(ProtocolTranslator.NATIVE_VERSION);
+            ProtocolTranslator.setTargetVersion(ProtocolTranslator.AUTO_DETECT_PROTOCOL);
         }
     }
 

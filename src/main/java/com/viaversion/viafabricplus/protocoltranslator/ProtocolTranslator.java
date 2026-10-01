@@ -111,7 +111,7 @@ public final class ProtocolTranslator {
     /**
      * This field stores the target version that you set in the GUI
      */
-    private static ProtocolVersion targetVersion = NATIVE_VERSION;
+    private static ProtocolVersion targetVersion = AUTO_DETECT_PROTOCOL;
 
     /**
      * This field stores the previous selected version if {@link #setTargetVersion(ProtocolVersion, boolean)} is called with revertOnDisconnect set to true
