@@ -25,6 +25,7 @@
     "base.ui.MixinAddServerScreen",
     "base.ui.MixinConnectScreen_1",
     "base.ui.MixinDirectConnectScreen",
+    "base.ui.MixinDisconnectedScreen",
     "base.ui.MixinDownloadingTerrainScreen",
     "base.ui.MixinMultiplayerScreen",
     "base.ui.MixinMultiplayerServerListWidget_ServerEntry",

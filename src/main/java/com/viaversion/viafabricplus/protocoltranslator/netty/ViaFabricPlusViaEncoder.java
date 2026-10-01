@@ -27,6 +27,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import io.netty.util.ReferenceCountUtil;
+import net.minecraft.network.handler.HandlerNames;
 import net.minecraft.network.handler.NetworkStateTransitions;
 
 public final class ViaFabricPlusViaEncoder extends ViaEncoder {
@@ -39,7 +40,13 @@ public final class ViaFabricPlusViaEncoder extends ViaEncoder {
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         if (msg instanceof NetworkStateTransitions.EncoderTransitioner transitioner) {
             try {
-                transitioner.run(ctx);
+                ChannelHandlerContext targetCtx = ctx.pipeline().context("outbound_config");
+                if (targetCtx == null) targetCtx = ctx.pipeline().context("encoder");
+                if (targetCtx == null) targetCtx = ctx.pipeline().context(HandlerNames.OUTBOUND_CONFIG);
+                if (targetCtx == null) targetCtx = ctx.pipeline().context(HandlerNames.ENCODER);
+                if (targetCtx != null) {
+                    transitioner.run(targetCtx);
+                }
                 ReferenceCountUtil.release(msg);
                 promise.setSuccess();
             } catch (final Throwable t) {
@@ -47,10 +54,37 @@ public final class ViaFabricPlusViaEncoder extends ViaEncoder {
             }
             return;
         }
-        if (!(msg instanceof ByteBuf)) {
-            ctx.write(msg, promise);
+
+        if (msg instanceof NetworkStateTransitions.DecoderTransitioner transitioner) {
+            try {
+                ChannelHandlerContext targetCtx = ctx.pipeline().context("inbound_config");
+                if (targetCtx == null) targetCtx = ctx.pipeline().context("decoder");
+                if (targetCtx == null) targetCtx = ctx.pipeline().context(HandlerNames.INBOUND_CONFIG);
+                if (targetCtx == null) targetCtx = ctx.pipeline().context(HandlerNames.DECODER);
+                if (targetCtx != null) {
+                    transitioner.run(targetCtx);
+                }
+                ReferenceCountUtil.release(msg);
+                promise.setSuccess();
+            } catch (final Throwable t) {
+                promise.setFailure(t);
+            }
             return;
         }
+
+        if (!(msg instanceof ByteBuf)) {
+            try {
+                if (msg instanceof Runnable runnable) {
+                    runnable.run();
+                }
+                ReferenceCountUtil.release(msg);
+                promise.setSuccess();
+            } catch (final Throwable t) {
+                promise.setFailure(t);
+            }
+            return;
+        }
+
         super.write(ctx, msg, promise);
     }
 
