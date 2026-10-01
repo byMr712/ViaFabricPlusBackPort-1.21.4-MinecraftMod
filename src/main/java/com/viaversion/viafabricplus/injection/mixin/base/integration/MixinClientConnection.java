@@ -21,10 +21,14 @@
 
 package com.viaversion.viafabricplus.injection.mixin.base.integration;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.viaversion.viafabricplus.ViaFabricPlusImpl;
 import com.viaversion.viafabricplus.settings.impl.DebugSettings;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.ClientConnection;
+import net.minecraft.network.DisconnectionInfo;
+import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -45,6 +49,16 @@ public abstract class MixinClientConnection {
             }
             ViaFabricPlusImpl.INSTANCE.logger().error("An exception occurred while handling a packet", ex);
         }
+    }
+
+    @WrapOperation(method = "exceptionCaught", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/ClientConnection;disconnect(Lnet/minecraft/network/DisconnectionInfo;)V"))
+    private void friendlyDisconnectReason(ClientConnection instance, DisconnectionInfo info, Operation<Void> original, ChannelHandlerContext context, Throwable ex) {
+        String msg = ex.getMessage();
+        if (msg == null || msg.isEmpty()) {
+            msg = ex.getClass().getSimpleName();
+        }
+        final Text friendlyText = Text.literal("§cАвтоопределение версии не удалось, попробуйте указать её вручную в названии сервера или меню ViaFabricPlus в меню серверов\n\n§7Детали: " + msg);
+        original.call(instance, new DisconnectionInfo(friendlyText, info.report(), info.bugReportLink()));
     }
 
 }
