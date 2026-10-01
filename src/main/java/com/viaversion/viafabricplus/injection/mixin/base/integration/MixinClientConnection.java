@@ -37,6 +37,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.net.ConnectException;
 import java.net.SocketException;
 
+import net.minecraft.util.Formatting;
+
 @Mixin(ClientConnection.class)
 public abstract class MixinClientConnection {
 
@@ -57,7 +59,11 @@ public abstract class MixinClientConnection {
         if (msg == null || msg.isEmpty()) {
             msg = ex.getClass().getSimpleName();
         }
-        final Text friendlyText = Text.literal("§cАвтоопределение версии не удалось, попробуйте указать её вручную в названии сервера или меню ViaFabricPlus в меню серверов\n\n§7Детали: " + msg);
+        final String cleanMsg = Formatting.strip(msg);
+        final Text friendlyText = Text.empty()
+                .append(Text.literal("Автоопределение версии не удалось или произошла сетевая ошибка\n").formatted(Formatting.RED, Formatting.BOLD))
+                .append(Text.literal("Попробуйте указать версию вручную в названии сервера (например '26.2') или через меню ViaFabricPlus в списке серверов.\n\n").formatted(Formatting.YELLOW))
+                .append(Text.literal("Детали: " + cleanMsg).formatted(Formatting.GRAY));
         original.call(instance, new DisconnectionInfo(friendlyText, info.report(), info.bugReportLink()));
     }
 
