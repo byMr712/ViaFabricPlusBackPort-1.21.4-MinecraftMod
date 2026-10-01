@@ -51,10 +51,24 @@ public final class ProtocolVersionDetector {
      * @return The protocol version of the server
      */
     public static ProtocolVersion get(final ServerAddress serverAddress, final InetSocketAddress socketAddress, final ProtocolVersion clientVersion) throws Exception {
+        InetSocketAddress targetSocketAddress = socketAddress;
+        if (targetSocketAddress == null) {
+            try {
+                final java.util.Optional<net.minecraft.client.network.Address> resolved = net.minecraft.client.network.AllowedAddressResolver.DEFAULT.resolve(serverAddress);
+                if (resolved.isPresent()) {
+                    targetSocketAddress = resolved.get().getInetSocketAddress();
+                }
+            } catch (final Throwable ignored) {
+            }
+            if (targetSocketAddress == null) {
+                targetSocketAddress = new InetSocketAddress(serverAddress.getAddress(), serverAddress.getPort());
+            }
+        }
+
         try (final Socket socket = new Socket()) {
             socket.setTcpNoDelay(true);
             socket.setSoTimeout(TIMEOUT);
-            socket.connect(socketAddress != null ? socketAddress : new InetSocketAddress(serverAddress.getAddress(), serverAddress.getPort()), TIMEOUT);
+            socket.connect(targetSocketAddress, TIMEOUT);
 
             try (
                 final DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -100,6 +114,18 @@ public final class ProtocolVersionDetector {
                     throw new IllegalStateException("Invalid ping response");
                 }
 
+                // Check if the server name explicitly specifies a known version (handles proxy spoofs where protocol is hardcoded to client version)
+                if (version.has("name")) {
+                    final String name = version.get("name").getAsString();
+                    for (final ProtocolVersion protocol : ProtocolVersionList.getProtocolsNewToOld()) {
+                        for (final String includedVersion : protocol.getIncludedVersions()) {
+                            if (name.contains(includedVersion)) {
+                                return protocol;
+                            }
+                        }
+                    }
+                }
+
                 if (version.has("protocol")) {
                     final int serverVersion = version.get("protocol").getAsInt();
 
@@ -114,16 +140,8 @@ public final class ProtocolVersionDetector {
                     }
                 }
 
-                // Fallback with the name
                 if (version.has("name")) {
                     final String name = version.get("name").getAsString();
-                    for (final ProtocolVersion protocol : ProtocolVersionList.getProtocolsNewToOld()) {
-                        for (final String includedVersion : protocol.getIncludedVersions()) {
-                            if (name.contains(includedVersion)) {
-                                return protocol;
-                            }
-                        }
-                    }
                     throw new RuntimeException("Unable to detect the server version\nServer sent an invalid protocol id: " + serverAddress + " (" + name + Formatting.RESET + ")");
                 }
 
