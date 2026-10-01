@@ -18,7 +18,7 @@ All rights belong to the original upstream authors — [ViaVersion](https://gith
 Original repository: [ViaVersion/ViaFabricPlus](https://github.com/ViaVersion/ViaFabricPlus).  
 
 - **Stable 1.21.4 Client:** Unlike upstream ViaFabricPlus which only supports the latest Minecraft release, this fork preserves your stable 1.21.4 client and mod environment while extending protocol compatibility up to **26.3** servers.
-- **Improved Version Auto-Detection:** Fixed SRV record resolution and replaced blocking socket connections with non-blocking `socket.connect(..., 3000)` timeout, plus domain name preservation for SNI / Virtual Hosting (Cloudflare, BungeeCord, Velocity) and graceful fallback handling.
+- **Smart Version Auto-Detection:** Automatically determines the server's real version upon connection. Works seamlessly even on proxied and protected servers (Velocity, BungeeCord, Cloudflare, and anarchy servers like 6b6t) that disguise or spoof their protocol ID. Features fast ping timeouts without UI freezing and full SRV record resolution.
 - **Updated Protocol Libraries:** Bundles up-to-date protocol translation libraries (**ViaVersion**, **ViaBackwards**, **ViaRewind**) for seamless multiplayer connections across all eras of Java Edition.
 - **Authentic Mechanics:** Preserves all QoL fixes and legacy physics emulation (Legacy Combat, Movement, hitboxes, and collision fixes).
 - **Built-in Compatibility Modules:** Includes pre-packaged `compat` patches for popular mods (Tide, Lithium, Inventory Profiles Next, Fabric API, etc.).
