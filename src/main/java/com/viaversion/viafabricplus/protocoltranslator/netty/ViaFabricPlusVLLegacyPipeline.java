@@ -54,6 +54,11 @@ public final class ViaFabricPlusVLLegacyPipeline extends VLLegacyPipeline {
     }
 
     @Override
+    protected ChannelHandler createViaEncoder() {
+        return new ViaFabricPlusViaEncoder(this.connection);
+    }
+
+    @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         // Bypass, because Krypton overwrites the entire compression instead of modifying the handlers.
         if (evt.getClass().getName().equals("me.steinborn.krypton.mod.shared.misc.KryptonPipelineEvent")) {
