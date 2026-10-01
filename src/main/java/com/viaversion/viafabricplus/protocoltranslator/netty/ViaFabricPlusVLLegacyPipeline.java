@@ -83,12 +83,12 @@ public final class ViaFabricPlusVLLegacyPipeline extends VLLegacyPipeline {
 
     @Override
     protected String packetDecoderName() {
-        return HandlerNames.DECODER;
+        return HandlerNames.INBOUND_CONFIG;
     }
 
     @Override
     protected String packetEncoderName() {
-        return HandlerNames.OUTBOUND_CONFIG;
+        return HandlerNames.ENCODER;
     }
 
     @Override
