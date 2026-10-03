@@ -60,6 +60,10 @@ public final class SettingsScreen extends VFPScreen {
                 this.addEntry(new TitleRenderer(group.getName()));
 
                 for (AbstractSetting<?> setting : group.getSettings()) {
+                    if (setting == com.viaversion.viafabricplus.settings.impl.GeneralSettings.INSTANCE.serverWarmupMode
+                            && !com.viaversion.viafabricplus.settings.impl.GeneralSettings.INSTANCE.showMr712DebugSettings.getValue()) {
+                        continue;
+                    }
                     switch (setting) {
                         case final BooleanSetting booleanSetting ->
                                 this.addEntry(new BooleanSettingRenderer(booleanSetting));

@@ -56,6 +56,18 @@
   "general_settings.viafabricplus.load_skins_and_skulls_in_legacy_versions": "Load skins and skulls in legacy versions",
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "Emulate inventory actions in alpha versions",
   "general_settings.viafabricplus.save_scroll_position_in_slot_screens": "Save scroll position in slot screens",
+  "general_settings.viafabricplus.show_mr712_debug_settings": "Show Mr712 debug settings",
+  "general_settings.viafabricplus.show_mr712_debug_settings.tooltip": "Displays advanced debug options, compatibility mode, and Mr712 protocol pipeline warmup toggles.",
+  "general_settings.viafabricplus.server_warmup_mode": "Hybrid server compatibility & warmup",
+  "general_settings.viafabricplus.server_warmup_mode.short": "Warmup Mode",
+  "general_settings.viafabricplus.server_warmup_mode.on_demand_ui": "On-Demand UI & Ping Warmup",
+  "general_settings.viafabricplus.server_warmup_mode.startup_preload": "Async Startup Preload",
+  "general_settings.viafabricplus.server_warmup_mode.native_priority": "Native Protocol Priority",
+  "general_settings.viafabricplus.server_warmup_mode.disabled": "Disabled (Lazy)",
+  "general_settings.viafabricplus.server_warmup_mode.tooltip.0": "On-Demand UI & Ping Warmup (Default):\nPre-warms protocol mapping tables in the background as soon as a version is selected in the UI or detected by ServerListPinger/Auto-Detect, eliminating connection login timeout lag while saving RAM.",
+  "general_settings.viafabricplus.server_warmup_mode.tooltip.1": "Async Startup Preload:\nPre-warms all popular version chains (1.21.x -> 1.21.11, 1.20.x, 1.16.5, 1.12.2, 1.8.9) in a background thread upon game launch / opening Multiplayer screen.",
+  "general_settings.viafabricplus.server_warmup_mode.tooltip.2": "Native Protocol Priority:\nWhen connecting to hybrid servers (e.g. Paper with ViaBackwards) that advertise native 1.21.4 (769) support, connects natively without client-side translation to avoid overhead.",
+  "general_settings.viafabricplus.server_warmup_mode.tooltip.3": "Disabled:\nClassic lazy loading (mappings are loaded only on the first network packet).",
 
 
   "debug_settings.viafabricplus.queue_config_packets": "Queue config packets",

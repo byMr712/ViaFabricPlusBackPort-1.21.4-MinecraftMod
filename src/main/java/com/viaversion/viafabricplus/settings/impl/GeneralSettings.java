@@ -60,10 +60,19 @@ public final class GeneralSettings extends SettingGroup {
     public final BooleanSetting loadSkinsAndSkullsInLegacyVersions = new BooleanSetting(this, Text.translatable("general_settings.viafabricplus.load_skins_and_skulls_in_legacy_versions"), true);
     public final BooleanSetting emulateInventoryActionsInAlphaVersions = new BooleanSetting(this, Text.translatable("general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions"), true);
     public final BooleanSetting saveScrollPositionInSlotScreens = new BooleanSetting(this, Text.translatable("general_settings.viafabricplus.save_scroll_position_in_slot_screens"), true);
+    public final BooleanSetting showMr712DebugSettings = new BooleanSetting(this, Text.translatable("general_settings.viafabricplus.show_mr712_debug_settings"), false);
+    public final ModeSetting serverWarmupMode = new ModeSetting(this, Text.translatable("general_settings.viafabricplus.server_warmup_mode"), 0,
+            Text.translatable("general_settings.viafabricplus.server_warmup_mode.on_demand_ui"),
+            Text.translatable("general_settings.viafabricplus.server_warmup_mode.startup_preload"),
+            Text.translatable("general_settings.viafabricplus.server_warmup_mode.native_priority"),
+            Text.translatable("general_settings.viafabricplus.server_warmup_mode.disabled")
+    );
 
     public GeneralSettings() {
         super(Text.translatable("setting_group_name.viafabricplus.general"));
         emulateInventoryActionsInAlphaVersions.setTooltip(Text.translatable("base.viafabricplus.this_will_require_a_restart"));
+        showMr712DebugSettings.setTooltip(Text.translatable("general_settings.viafabricplus.show_mr712_debug_settings.tooltip"));
+        serverWarmupMode.setTooltip(() -> Text.translatable("general_settings.viafabricplus.server_warmup_mode.tooltip." + serverWarmupMode.getIndex()));
     }
 
     public static ButtonWidget.Builder withOrientation(final ButtonWidget.Builder builder, final int orientationIndex, final int width, final int height) {

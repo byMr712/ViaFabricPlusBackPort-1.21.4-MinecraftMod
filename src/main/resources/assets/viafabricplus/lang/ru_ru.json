@@ -57,6 +57,18 @@
   "general_settings.viafabricplus.load_skins_and_skulls_in_legacy_versions": "Скины и головы игроков в старых версиях",
   "general_settings.viafabricplus.emulate_inventory_actions_in_alpha_versions": "Эмулировать действия в инвентаре в alpha-версиях",
   "general_settings.viafabricplus.save_scroll_position_in_slot_screens": "Запоминать позицию прокрутки в настройках ViaFabricPlus",
+  "general_settings.viafabricplus.show_mr712_debug_settings": "Показывать настройки для отладки Mr712",
+  "general_settings.viafabricplus.show_mr712_debug_settings.tooltip": "Отображает расширенные параметры отладки, режим совместимости и переключатели прогрева пайплайна Mr712.",
+  "general_settings.viafabricplus.server_warmup_mode": "Совместимость с гибридными серверами и прогрев",
+  "general_settings.viafabricplus.server_warmup_mode.short": "Режим прогрева",
+  "general_settings.viafabricplus.server_warmup_mode.on_demand_ui": "Предпрогрев в UI и при пинге",
+  "general_settings.viafabricplus.server_warmup_mode.startup_preload": "Фоновый прогрев при запуске",
+  "general_settings.viafabricplus.server_warmup_mode.native_priority": "Приоритет нативного протокола",
+  "general_settings.viafabricplus.server_warmup_mode.disabled": "Отключено (ленивая загрузка)",
+  "general_settings.viafabricplus.server_warmup_mode.tooltip.0": "Предпрогрев в UI и при пинге (По умолчанию):\nФоновая предзагрузка таблиц маппингов при выборе версии в меню или автоопределении серверов в списке, предотвращая таймауты подключения и экономя память.",
+  "general_settings.viafabricplus.server_warmup_mode.tooltip.1": "Фоновый прогрев при запуске:\nПредзагрузка цепочек популярных версий (1.21.x -> 1.21.11, 1.20.x, 1.16.5, 1.12.2, 1.8.9) в фоновом потоке сразу при старте игры / открытии меню сетевой игры.",
+  "general_settings.viafabricplus.server_warmup_mode.tooltip.2": "Приоритет нативного протокола:\nПри подключении к гибридным серверам (например, Paper с ViaBackwards), заявляющим поддержку 1.21.4 (769), подключается нативно без трансляции на клиенте.",
+  "general_settings.viafabricplus.server_warmup_mode.tooltip.3": "Отключено:\nКлассическая ленивая загрузка (маппинги загружаются только при прохождении первого сетевого пакета).",
 
 
   "debug_settings.viafabricplus.queue_config_packets": "Очередь пакетов этапа настройки",

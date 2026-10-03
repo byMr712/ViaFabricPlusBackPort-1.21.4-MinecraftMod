@@ -114,7 +114,15 @@ public final class ProtocolVersionDetector {
                     throw new IllegalStateException("Invalid ping response");
                 }
 
-                // Check if the server name explicitly specifies a known version (handles proxy spoofs where protocol is hardcoded to client version)
+                // 1. If the server (or ViaBackwards on the server) explicitly accepts our client's native protocol, connect natively!
+                if (version.has("protocol")) {
+                    final int serverVersion = version.get("protocol").getAsInt();
+                    if (clientVersion.getOriginalVersion() == serverVersion) {
+                        return clientVersion;
+                    }
+                }
+
+                // 2. Check if the server name/MOTD specifies a target version (useful for multi-version proxies like Bungee/Velocity that report -1 or custom protocol)
                 if (version.has("name")) {
                     final String name = version.get("name").getAsString();
                     for (final ProtocolVersion protocol : ProtocolVersionList.getProtocolsNewToOld()) {
@@ -122,6 +130,7 @@ public final class ProtocolVersionDetector {
                             if (includedVersion != null && includedVersion.contains(".")) {
                                 final String regex = "(?i)(^|[^a-zA-Z0-9.])" + java.util.regex.Pattern.quote(includedVersion) + "($|[^a-zA-Z0-9.])";
                                 if (java.util.regex.Pattern.compile(regex).matcher(name).find()) {
+                                    ProtocolWarmupManager.warmupAsync(protocol);
                                     return protocol;
                                 }
                             }
@@ -129,17 +138,13 @@ public final class ProtocolVersionDetector {
                     }
                 }
 
+                // 3. Fallback to reported protocol number if registered in ViaVersion
                 if (version.has("protocol")) {
                     final int serverVersion = version.get("protocol").getAsInt();
-
-                    // If the server is on the same version as the client, we can just connect
-                    if (clientVersion.getOriginalVersion() == serverVersion) {
-                        return clientVersion;
-                    }
-
-                    // If the protocol is registered, we can use it
                     if (ProtocolVersion.isRegistered(serverVersion)) {
-                        return ProtocolVersion.getProtocol(serverVersion);
+                        final ProtocolVersion protocol = ProtocolVersion.getProtocol(serverVersion);
+                        ProtocolWarmupManager.warmupAsync(protocol);
+                        return protocol;
                     }
                 }
 

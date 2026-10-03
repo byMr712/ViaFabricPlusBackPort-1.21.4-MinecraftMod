@@ -52,7 +52,32 @@ public abstract class MixinMultiplayerServerListPinger_1 implements ClientQueryP
         // If ViaVersion is translating the current connection, we track the target version, and it's state in the server info
         // So we can later draw this information when hovering over the ping bar in the server list
         if (field_3774 instanceof IClientConnection mixinClientConnection) {
-            ((IServerInfo) field_3776).viaFabricPlus$setTranslatingVersion(mixinClientConnection.viaFabricPlus$getTargetVersion());
+            final ProtocolVersion translatingVersion = mixinClientConnection.viaFabricPlus$getTargetVersion();
+            ((IServerInfo) field_3776).viaFabricPlus$setTranslatingVersion(translatingVersion);
+            if (translatingVersion != null) {
+                com.viaversion.viafabricplus.protocoltranslator.util.ProtocolWarmupManager.warmupAsync(translatingVersion);
+            }
+        }
+
+        if (packet != null && packet.metadata() != null && packet.metadata().version().isPresent()) {
+            final net.minecraft.server.ServerMetadata.Version ver = packet.metadata().version().get();
+            final String gameVersion = ver.gameVersion();
+            if (gameVersion != null && !gameVersion.isEmpty()) {
+                for (final ProtocolVersion protocol : com.viaversion.vialoader.util.ProtocolVersionList.getProtocolsNewToOld()) {
+                    for (final String includedVersion : protocol.getIncludedVersions()) {
+                        if (includedVersion != null && includedVersion.contains(".")) {
+                            final String regex = "(?i)(^|[^a-zA-Z0-9.])" + java.util.regex.Pattern.quote(includedVersion) + "($|[^a-zA-Z0-9.])";
+                            if (java.util.regex.Pattern.compile(regex).matcher(gameVersion).find()) {
+                                com.viaversion.viafabricplus.protocoltranslator.util.ProtocolWarmupManager.warmupAsync(protocol);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (ProtocolVersion.isRegistered(ver.protocolVersion())) {
+                com.viaversion.viafabricplus.protocoltranslator.util.ProtocolWarmupManager.warmupAsync(ProtocolVersion.getProtocol(ver.protocolVersion()));
+            }
         }
     }
 

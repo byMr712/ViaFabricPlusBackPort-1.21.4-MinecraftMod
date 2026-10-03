@@ -45,6 +45,7 @@ public abstract class MixinMultiplayerScreen extends Screen {
 
     @Inject(method = "init", at = @At("RETURN"))
     private void addProtocolSelectionButton(CallbackInfo ci) {
+        com.viaversion.viafabricplus.protocoltranslator.util.ProtocolWarmupManager.onClientOrMultiplayerInit();
         final int buttonPosition = GeneralSettings.INSTANCE.multiplayerScreenButtonOrientation.getIndex();
         if (buttonPosition == 0) { // Off
             return;

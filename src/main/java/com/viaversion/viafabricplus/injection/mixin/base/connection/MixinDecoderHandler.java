@@ -60,13 +60,6 @@ public abstract class MixinDecoderHandler {
             return;
         }
 
-        final boolean hasViaActive = (ProtocolTranslator.getTargetVersion() != ProtocolTranslator.NATIVE_VERSION)
-                || (ctx.channel() != null && ctx.channel().hasAttr(ProtocolTranslator.TARGET_VERSION_ATTRIBUTE_KEY));
-
-        if (!hasViaActive) {
-            return;
-        }
-
         ci.cancel();
 
         final int startReadable = buf.readableBytes();
@@ -115,12 +108,12 @@ public abstract class MixinDecoderHandler {
     private static boolean viaFabricPlus$isCommandTreeError(Throwable t) {
         while (t != null) {
             final String msg = t.getMessage();
-            if (msg != null && (msg.contains("commands") || msg.contains("class_2641") || msg.contains("CommandTreeS2CPacket"))) {
+            if (msg != null && (msg.toLowerCase().contains("commands") || msg.contains("class_2641") || msg.contains("CommandTree"))) {
                 return true;
             }
             for (final StackTraceElement element : t.getStackTrace()) {
                 final String cn = element.getClassName();
-                if (cn.contains("CommandTreeS2CPacket") || cn.contains("class_2641")) {
+                if (cn.contains("CommandTree") || cn.contains("class_2641")) {
                     return true;
                 }
             }

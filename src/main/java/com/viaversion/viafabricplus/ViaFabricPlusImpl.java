@@ -113,6 +113,7 @@ public final class ViaFabricPlusImpl implements ViaFabricPlusBase {
             }
             loadingFuture.join();
             SaveManager.INSTANCE.postInit();
+            com.viaversion.viafabricplus.protocoltranslator.util.ProtocolWarmupManager.onClientOrMultiplayerInit();
         });
         Events.LOADING_CYCLE.invoker().onLoadCycle(LoadingCycleCallback.LoadingCycle.FINAL_LOAD);
     }

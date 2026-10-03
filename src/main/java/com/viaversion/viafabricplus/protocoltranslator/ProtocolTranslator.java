@@ -174,6 +174,7 @@ public final class ProtocolTranslator {
             }
             Events.CHANGE_PROTOCOL_VERSION.invoker().onChangeProtocolVersion(oldVersion, targetVersion);
         }
+        com.viaversion.viafabricplus.protocoltranslator.util.ProtocolWarmupManager.warmupAsync(newVersion);
     }
 
     /**
